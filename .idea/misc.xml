@@ -1,5 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="DesignSurface">
+    <option name="filePathToZoomLevelMap">
+      <map>
+        <entry key="../../../../../layout/custom_preview.xml" value="0.146875" />
+        <entry key="app/src/main/res/drawable/btn1_selector.xml" value="0.13541666666666666" />
+        <entry key="app/src/main/res/drawable/tab_button.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_button_focused.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_left_button.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_left_button_focused.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_middle_button.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_middle_button_default.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/tab_middle_button_selected.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/tab_middle_button_selector.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/tab_right_button.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/tab_right_button_default.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/tab_right_button_selected.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/tab_right_button_selector.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.11927083333333334" />
+        <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22860298177802318" />
+      </map>
+    </option>
+  </component>
   <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>

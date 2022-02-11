@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".views.login.LoginFragment">
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="235dp"
+        android:scaleType="centerCrop"
+        android:src="@drawable/login_bg" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
+        android:layout_centerInParent="true"
+        android:layout_marginTop="50dp"
+        android:src="@drawable/login_dish" />
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@id/imageView"
+        android:layout_marginLeft="16dp"
+        android:fontFamily="@font/poppins_regular"
+        android:text="Log In"
+        android:textColor="@color/black"
+        android:textSize="26sp" />
+</RelativeLayout>
+
+<com.ratings.app.views.RadioGridGroup
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:useDefaultMargins="true"
+    android:layout_marginTop="20dp"
+    android:layout_marginHorizontal="16dp">
+
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/user_btn"
+            android:text="User"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:layout_columnWeight="33.33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_left_button_selector"
+            android:button="@null"
+            android:textColor="@color/white"
+            android:checked="true"/>
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/owner_btn"
+            android:text="Owner"
+            android:paddingVertical="12dp"
+            android:gravity="center"
+            android:layout_columnWeight="33.33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_middle_button_selector"
+            android:button="@null" />
+        <androidx.appcompat.widget.AppCompatRadioButton
+            android:id="@+id/admin_btn"
+            android:text="Admin"
+            android:gravity="center"
+            android:paddingVertical="12dp"
+            android:layout_columnWeight="33.33"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/tab_right_button_selector"
+            android:button="@null"/>
+
+</com.ratings.app.views.RadioGridGroup>
+</LinearLayout>
