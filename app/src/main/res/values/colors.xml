@@ -8,4 +8,7 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="selected_tab">#FF5823</color>
+    <color name="textHint">#7C7C7C</color>
+    <color name="button_color">#54BF29</color>
+    <color name="button_disabled">#E2E2E2</color>
 </resources>

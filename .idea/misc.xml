@@ -4,6 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="../../../../../layout/custom_preview.xml" value="0.146875" />
+        <entry key="app/src/main/res/drawable/auth_button_bg.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/auth_button_bg_disabled.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/auth_button_bg_selector.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/btn1_selector.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/drawable/tab_button.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/tab_button_focused.xml" value="0.25416666666666665" />
@@ -19,6 +22,7 @@
         <entry key="app/src/main/res/drawable/tab_right_button_selector.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11927083333333334" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22860298177802318" />
+        <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.25" />
       </map>
     </option>
   </component>

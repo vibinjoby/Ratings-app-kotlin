@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -49,6 +50,7 @@
             android:text="User"
             android:gravity="center"
             android:paddingVertical="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:layout_columnWeight="33.33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -60,6 +62,7 @@
             android:id="@+id/owner_btn"
             android:text="Owner"
             android:paddingVertical="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:gravity="center"
             android:layout_columnWeight="33.33"
             android:layout_width="wrap_content"
@@ -71,11 +74,95 @@
             android:text="Admin"
             android:gravity="center"
             android:paddingVertical="12dp"
+            android:fontFamily="@font/poppins_regular"
             android:layout_columnWeight="33.33"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@drawable/tab_right_button_selector"
             android:button="@null"/>
 
+
 </com.ratings.app.views.RadioGridGroup>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/email_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintTextColor="@color/textHint"
+            android:hint="Email">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:textColor="@color/black"
+            />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/password_field"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            app:hintTextColor="@color/textHint"
+            app:passwordToggleEnabled="true"
+            android:hint="Password">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/poppins_regular"
+                android:textSize="18sp"
+                android:textColor="@color/black"
+                android:inputType="textPassword"
+                />
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/login_btn"
+            android:layout_marginTop="40dp"
+            android:textColor="@color/white"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="18sp"
+            android:paddingVertical="20dp"
+            android:textAllCaps="false"
+            android:text="Login"
+            android:enabled="false"
+            android:background="@drawable/auth_button_bg_selector"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_marginTop="20dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Don't have an account?"
+                android:textSize="14sp"
+                android:textColor="@color/black"
+                android:fontFamily="@font/poppins_regular" />
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/signup_btn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Sign Up"
+                android:textSize="14sp"
+                android:fontFamily="@font/poppins_regular"
+                android:inputType="text"
+                android:textColor="@color/button_color"
+                android:textAllCaps="false"
+                android:background="@null"
+                />
+        </LinearLayout>
+    </LinearLayout>
 </LinearLayout>
