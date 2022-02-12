@@ -37,7 +37,7 @@
         android:textSize="26sp" />
 </RelativeLayout>
 
-<com.ratings.app.views.RadioGridGroup
+<com.ratings.app.views.customviews.RadioGridGroup
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
@@ -82,7 +82,7 @@
             android:button="@null"/>
 
 
-</com.ratings.app.views.RadioGridGroup>
+</com.ratings.app.views.customviews.RadioGridGroup>
     <LinearLayout
         android:orientation="vertical"
         android:layout_marginHorizontal="16dp"

@@ -1,4 +1,4 @@
-package com.ratings.app.views
+package com.ratings.app.views.customviews
 
 import android.content.Context
 import android.util.AttributeSet
