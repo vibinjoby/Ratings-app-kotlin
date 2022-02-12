@@ -1,0 +1,5 @@
+mutation AdminLogin($adminInput: CreateAdminInput!) {
+    loginAsAdmin(data: $adminInput) {
+        token
+    }
+}

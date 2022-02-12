@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/restaurant_iv"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"
+        android:scaleType="fitStart"
+        android:src="@drawable/restaurant_image_placeholder"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:background="@drawable/restaurant_image_bg"
+        />
+    <TextView
+        android:id="@+id/restaurant_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Joes Pizzería"
+        android:textColor="@color/black"
+        android:textFontWeight="600"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_iv"
+        app:layout_constraintLeft_toLeftOf="@id/restaurant_iv"
+        />
+    <TextView
+        android:id="@+id/ratings_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="3.5"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:textColor="@color/reviews_text"
+        app:layout_constraintTop_toBottomOf="@id/restaurant_name_tv"
+        app:layout_constraintLeft_toLeftOf="@id/restaurant_name_tv"
+        />
+    <TextView
+        android:id="@+id/reviews_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="84 Reviews"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="14sp"
+        android:textColor="@color/reviews_text"
+        android:layout_marginLeft="10dp"
+        app:layout_constraintLeft_toRightOf="@id/ratings_tv"
+        app:layout_constraintTop_toTopOf="@id/ratings_tv"
+        />
+</androidx.constraintlayout.widget.ConstraintLayout>

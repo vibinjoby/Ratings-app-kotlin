@@ -9,6 +9,7 @@
         <entry key="app/src/main/res/drawable/auth_button_bg_disabled.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/auth_button_bg_selector.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/btn1_selector.xml" value="0.13541666666666666" />
+        <entry key="app/src/main/res/drawable/restaurant_image_bg.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/tab_button.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/tab_button_focused.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/tab_left_button.xml" value="0.25416666666666665" />
@@ -25,6 +26,7 @@
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.21875" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22860298177802318" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.1" />
+        <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.25" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher_round.xml" value="0.25416666666666665" />
       </map>
     </option>

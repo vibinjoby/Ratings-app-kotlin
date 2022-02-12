@@ -11,7 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.google.android.material.textfield.TextInputLayout
 import com.ratings.app.R
-import com.ratings.app.utils.isErrors
+import com.ratings.app.helper.isErrors
 
 class LoginFragment : Fragment() {
     private val TAG = "LoginFragment"

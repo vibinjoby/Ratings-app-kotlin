@@ -9,7 +9,7 @@ import androidx.appcompat.widget.AppCompatButton
 import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.ratings.app.R
-import com.ratings.app.utils.isErrors
+import com.ratings.app.helper.isErrors
 
 class SignupFragment : Fragment() {
 
