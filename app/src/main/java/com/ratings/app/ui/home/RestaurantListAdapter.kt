@@ -1,4 +1,4 @@
-package com.ratings.app.views.home
+package com.ratings.app.ui.home
 
 import android.view.LayoutInflater
 import android.view.View
@@ -57,9 +57,5 @@ class RestaurantListAdapter: ListAdapter<RestaurantListQuery.Node, RestaurantVie
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         holder.bind(getItem(position))
-    }
-
-    override fun getItemCount(): Int {
-        return super.getItemCount()
     }
 }

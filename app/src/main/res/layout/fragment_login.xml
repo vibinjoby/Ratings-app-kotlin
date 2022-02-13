@@ -1,119 +1,119 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+<androidx.constraintlayout.widget.ConstraintLayout android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".views.login.LoginFragment">
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="match_parent"
-        android:layout_height="235dp"
-        android:scaleType="centerCrop"
-        android:src="@drawable/login_bg" />
-
-    <ImageView
-        android:id="@+id/imageView2"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_centerInParent="true"
-        android:layout_marginTop="50dp"
-        android:src="@drawable/login_dish" />
-
-    <TextView
-        android:id="@+id/login_text"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <ProgressBar
+        android:id="@+id/loading_progress_bar"
+        android:visibility="gone"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@id/imageView"
-        android:layout_marginLeft="16dp"
-        android:fontFamily="@font/poppins_regular"
-        android:text="Log In"
-        android:textColor="@color/black"
-        android:textSize="26sp" />
-</RelativeLayout>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"/>
 
-<com.ratings.app.views.customviews.RadioGridGroup
-    android:id="@+id/user_type"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:useDefaultMargins="true"
-    android:layout_marginTop="20dp"
-    android:layout_marginHorizontal="16dp">
-
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/user_btn"
-            android:text="User"
-            android:gravity="center"
-            android:paddingVertical="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_columnWeight="33.33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_left_button_selector"
-            android:button="@null"
-            android:textColor="@color/white"
-            android:checked="true"/>
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/owner_btn"
-            android:text="Owner"
-            android:paddingVertical="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:gravity="center"
-            android:layout_columnWeight="33.33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_middle_button_selector"
-            android:button="@null" />
-        <androidx.appcompat.widget.AppCompatRadioButton
-            android:id="@+id/admin_btn"
-            android:text="Admin"
-            android:gravity="center"
-            android:paddingVertical="12dp"
-            android:fontFamily="@font/poppins_regular"
-            android:layout_columnWeight="33.33"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_right_button_selector"
-            android:button="@null"/>
-
-
-</com.ratings.app.views.customviews.RadioGridGroup>
-    <LinearLayout
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
         android:orientation="vertical"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="20dp"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/email_field"
+        android:layout_height="match_parent"
+        tools:context=".ui.login.LoginFragment">
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:hintTextColor="@color/textHint"
-            android:hint="Email">
+            android:layout_height="wrap_content">
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="18sp"
-            android:textColor="@color/black"
-            />
-        </com.google.android.material.textfield.TextInputLayout>
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="235dp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/login_bg" />
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/password_field"
+            <ImageView
+                android:id="@+id/imageView2"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="50dp"
+                android:src="@drawable/login_dish" />
+
+            <TextView
+                android:id="@+id/login_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/imageView"
+                android:layout_marginLeft="16dp"
+                android:fontFamily="@font/poppins_regular"
+                android:text="Log In"
+                android:textColor="@color/black"
+                android:textSize="26sp" />
+        </RelativeLayout>
+
+        <com.ratings.app.ui.customviews.RadioGridGroup
+            android:id="@+id/user_type"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:useDefaultMargins="true"
             android:layout_marginTop="20dp"
-            app:hintTextColor="@color/textHint"
-            app:passwordToggleEnabled="true"
-            android:hint="Password">
+            android:layout_marginHorizontal="16dp">
+
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/user_btn"
+                    android:text="User"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_columnWeight="33.33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_left_button_selector"
+                    android:button="@null"
+                    android:textColor="@color/white"
+                    android:checked="true"/>
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/owner_btn"
+                    android:text="Owner"
+                    android:paddingVertical="12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:gravity="center"
+                    android:layout_columnWeight="33.33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_middle_button_selector"
+                    android:button="@null" />
+                <androidx.appcompat.widget.AppCompatRadioButton
+                    android:id="@+id/admin_btn"
+                    android:text="Admin"
+                    android:gravity="center"
+                    android:paddingVertical="12dp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:layout_columnWeight="33.33"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/tab_right_button_selector"
+                    android:button="@null"/>
+
+
+        </com.ratings.app.ui.customviews.RadioGridGroup>
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/email_field"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:hintTextColor="@color/textHint"
+                android:hint="Email">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_width="match_parent"
@@ -121,49 +121,68 @@
                 android:fontFamily="@font/poppins_regular"
                 android:textSize="18sp"
                 android:textColor="@color/black"
-                android:inputType="textPassword"
                 />
-        </com.google.android.material.textfield.TextInputLayout>
+            </com.google.android.material.textfield.TextInputLayout>
 
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/login_btn"
-            android:layout_marginTop="40dp"
-            android:textColor="@color/white"
-            android:fontFamily="@font/poppins_regular"
-            android:textSize="18sp"
-            android:paddingVertical="20dp"
-            android:textAllCaps="false"
-            android:text="Login"
-            android:enabled="false"
-            android:background="@drawable/auth_button_bg_selector"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center"
-            android:layout_marginTop="20dp">
-            <TextView
-                android:layout_width="wrap_content"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/password_field"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Don't have an account?"
-                android:textSize="14sp"
-                android:textColor="@color/black"
-                android:fontFamily="@font/poppins_regular" />
+                android:layout_marginTop="20dp"
+                app:hintTextColor="@color/textHint"
+                app:passwordToggleEnabled="true"
+                android:hint="Password">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="@font/poppins_regular"
+                    android:textSize="18sp"
+                    android:textColor="@color/black"
+                    android:inputType="textPassword"
+                    />
+            </com.google.android.material.textfield.TextInputLayout>
+
             <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/signup_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Sign Up"
-                android:textSize="14sp"
+                android:id="@+id/login_btn"
+                android:layout_marginTop="40dp"
+                android:textColor="@color/white"
                 android:fontFamily="@font/poppins_regular"
-                android:inputType="text"
-                android:textColor="@color/button_color"
+                android:textSize="18sp"
+                android:paddingVertical="20dp"
                 android:textAllCaps="false"
-                android:background="@null"
-                />
+                android:text="Login"
+                android:enabled="false"
+                android:background="@drawable/auth_button_bg_selector"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginTop="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Don't have an account?"
+                    android:textSize="14sp"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/poppins_regular" />
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/signup_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Sign Up"
+                    android:textSize="14sp"
+                    android:fontFamily="@font/poppins_regular"
+                    android:inputType="text"
+                    android:textColor="@color/button_color"
+                    android:textAllCaps="false"
+                    android:background="@null"
+                    />
+            </LinearLayout>
         </LinearLayout>
     </LinearLayout>
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,4 +1,4 @@
-package com.ratings.app.views.login
+package com.ratings.app.ui.login
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
@@ -16,6 +16,10 @@ class LoginViewModel(private val authRepository: AuthRepository, private val log
 
     val networkState: LiveData<NetworkState> by lazy {
         authRepository.getAuthUserNetworkState()
+    }
+
+    fun saveAccessToken(accessToken: String) {
+        authRepository.saveAccessToken(accessToken)
     }
 
     override fun onCleared() {

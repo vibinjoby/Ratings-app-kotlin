@@ -3,6 +3,7 @@ package com.ratings.app.api
 import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.api.Optional
+import com.apollographql.apollo3.network.okHttpClient
 import com.apollographql.apollo3.rx2.Rx2Apollo
 import com.ratings.app.AdminLoginMutation
 import com.ratings.app.LoginMutation
@@ -14,11 +15,13 @@ import com.ratings.app.type.CreateUserInput
 import com.ratings.app.type.LoginInput
 import com.ratings.app.type.UserType
 import io.reactivex.Single
+import okhttp3.OkHttpClient
 
-class RatingsApiClient {
+class RatingsApiClient(private val okHttpClient: OkHttpClient) {
     private fun getClient(): ApolloClient {
        return ApolloClient.Builder()
             .serverUrl(API_URL)
+           .okHttpClient(okHttpClient)
             .build()
     }
 

@@ -1,4 +1,4 @@
-package com.ratings.app.views.signup
+package com.ratings.app.ui.signup
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

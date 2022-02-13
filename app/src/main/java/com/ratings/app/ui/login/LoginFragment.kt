@@ -1,4 +1,4 @@
-package com.ratings.app.views.login
+package com.ratings.app.ui.login
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ProgressBar
 import android.widget.RadioButton
 import androidx.appcompat.widget.AppCompatButton
 import androidx.lifecycle.ViewModel
@@ -15,12 +16,15 @@ import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.google.android.material.textfield.TextInputLayout
 import com.ratings.app.R
+import com.ratings.app.api.AuthorizationInterceptor
 import com.ratings.app.api.RatingsApiClient
 import com.ratings.app.helper.isErrors
 import com.ratings.app.repository.AuthRepository
+import com.ratings.app.repository.NetworkState
 import com.ratings.app.type.LoginInput
 import com.ratings.app.type.UserType
-import com.ratings.app.views.customviews.RadioGridGroup
+import com.ratings.app.ui.customviews.RadioGridGroup
+import okhttp3.OkHttpClient
 
 class LoginFragment : Fragment() {
     private val TAG = "LoginFragment"
@@ -38,6 +42,8 @@ class LoginFragment : Fragment() {
         val emailField = view.findViewById<TextInputLayout>(R.id.email_field)
         val passwordField = view.findViewById<TextInputLayout>(R.id.password_field)
         val userTypeRadioGroup = view.findViewById<RadioGridGroup>(R.id.user_type)
+
+        val progressBar = view.findViewById<ProgressBar>(R.id.loading_progress_bar)
 
         form {
             useRealTimeValidation(disableSubmit = true)
@@ -70,22 +76,31 @@ class LoginFragment : Fragment() {
 
                 if(emailValue.isNotBlank() && passwordValue.isNotBlank()) {
                     val loginInput = LoginInput(emailValue, passwordValue, fetchUserType(userType.text.toString()))
-                    val apiService = RatingsApiClient()
+                    val okHttpClient = OkHttpClient.Builder()
+                        .build()
+                    val apiService = RatingsApiClient(okHttpClient)
                     authRepository = AuthRepository(apiService,requireContext())
                     authViewModel = ViewModelProvider(this@LoginFragment, object: ViewModelProvider.Factory {
                         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
                             return LoginViewModel(authRepository,loginInput) as T
                         }
                     })[LoginViewModel::class.java]
+
                     authViewModel.accessToken.observe(this@LoginFragment.viewLifecycleOwner, {
                         // Save the access token
-                        authRepository.saveAccessToken(it)
+                        authViewModel.saveAccessToken(it)
                         // Navigate to homePage
                         val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
                         navigateTo(action)
                     })
+
                     authViewModel.networkState.observe(this@LoginFragment.viewLifecycleOwner, {
-                        print(it)
+                        // Show progress bar based on network status
+                        if(it == NetworkState.LOADING ) {
+                            progressBar.visibility = View.VISIBLE
+                        } else {
+                            progressBar.visibility = View.GONE
+                        }
                     })
                 }
             }
