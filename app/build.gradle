@@ -94,6 +94,8 @@ dependencies {
 
     //apollo
     implementation "com.apollographql.apollo3:apollo-runtime:3.1.0"
+    implementation 'com.apollographql.apollo3:apollo-rx2-support:3.1.0'
+
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'
