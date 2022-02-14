@@ -12,8 +12,9 @@ import com.ratings.app.type.LoginInput
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
+import javax.inject.Inject
 
-class HomeRepository(private val apiService: RatingsApiClient) {
+class HomeRepository @Inject constructor(private val apiService: RatingsApiClient) {
     private lateinit var homeNetworkSource: HomeNetworkSource
 
     fun fetchRestaurants(compositeDisposable: CompositeDisposable): LiveData<RestaurantListQuery.GetRestaurants> {

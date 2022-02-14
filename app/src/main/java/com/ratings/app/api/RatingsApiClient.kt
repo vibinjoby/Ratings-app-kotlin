@@ -16,8 +16,9 @@ import com.ratings.app.type.LoginInput
 import com.ratings.app.type.UserType
 import io.reactivex.Single
 import okhttp3.OkHttpClient
+import javax.inject.Inject
 
-class RatingsApiClient(private val okHttpClient: OkHttpClient) {
+class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClient) {
     private fun getClient(): ApolloClient {
        return ApolloClient.Builder()
             .serverUrl(API_URL)

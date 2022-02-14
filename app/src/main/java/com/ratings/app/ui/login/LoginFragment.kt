@@ -9,6 +9,7 @@ import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RadioButton
 import androidx.appcompat.widget.AppCompatButton
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
@@ -18,19 +19,24 @@ import com.google.android.material.textfield.TextInputLayout
 import com.ratings.app.R
 import com.ratings.app.api.AuthorizationInterceptor
 import com.ratings.app.api.RatingsApiClient
+import com.ratings.app.di.RatingsApplication
 import com.ratings.app.helper.isErrors
 import com.ratings.app.repository.AuthRepository
 import com.ratings.app.repository.NetworkState
 import com.ratings.app.type.LoginInput
 import com.ratings.app.type.UserType
 import com.ratings.app.ui.customviews.RadioGridGroup
+import dagger.android.support.DaggerFragment
 import okhttp3.OkHttpClient
+import javax.inject.Inject
 
-class LoginFragment : Fragment() {
+class LoginFragment : DaggerFragment(R.layout.fragment_login) {
     private val TAG = "LoginFragment"
 
-    private lateinit var authViewModel: LoginViewModel
-    private lateinit var authRepository: AuthRepository
+    @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
+    private val authViewModel: LoginViewModel by viewModels {
+        viewModelFactory
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -76,15 +82,8 @@ class LoginFragment : Fragment() {
 
                 if(emailValue.isNotBlank() && passwordValue.isNotBlank()) {
                     val loginInput = LoginInput(emailValue, passwordValue, fetchUserType(userType.text.toString()))
-                    val okHttpClient = OkHttpClient.Builder()
-                        .build()
-                    val apiService = RatingsApiClient(okHttpClient)
-                    authRepository = AuthRepository(apiService,requireContext())
-                    authViewModel = ViewModelProvider(this@LoginFragment, object: ViewModelProvider.Factory {
-                        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-                            return LoginViewModel(authRepository,loginInput) as T
-                        }
-                    })[LoginViewModel::class.java]
+                    RatingsApplication.get().clearComponent()
+                    RatingsApplication.get().createLoginInput(loginInput)
 
                     authViewModel.accessToken.observe(this@LoginFragment.viewLifecycleOwner, {
                         // Save the access token

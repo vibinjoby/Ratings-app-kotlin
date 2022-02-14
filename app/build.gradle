@@ -3,6 +3,8 @@ plugins {
     id 'kotlin-android'
     id 'androidx.navigation.safeargs.kotlin'
     id('com.apollographql.apollo3').version("3.1.0")
+    id 'kotlin-kapt'
+    id "scabbard.gradle" version "0.5.0"
 }
 
 def getProperty(String filename, String propName) {
@@ -52,6 +54,8 @@ android {
     }
 }
 
+apply plugin: "scabbard.gradle"
+
 dependencies {
 
     implementation 'androidx.core:core-ktx:1.7.0'
@@ -95,6 +99,12 @@ dependencies {
     //apollo
     implementation "com.apollographql.apollo3:apollo-runtime:3.1.0"
     implementation 'com.apollographql.apollo3:apollo-rx2-support:3.1.0'
+
+    // Dagger2
+    implementation "com.google.dagger:dagger:2.40.5"
+    implementation 'com.google.dagger:dagger-android-support:2.40.5'
+    kapt 'com.google.dagger:dagger-android-processor:2.40.5'
+    kapt 'com.google.dagger:dagger-compiler:2.40.5'
 
 
     testImplementation 'junit:junit:4.+'
