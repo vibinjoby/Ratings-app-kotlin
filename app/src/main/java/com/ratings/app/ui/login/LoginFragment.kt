@@ -21,6 +21,7 @@ import com.ratings.app.api.AuthorizationInterceptor
 import com.ratings.app.api.RatingsApiClient
 import com.ratings.app.di.RatingsApplication
 import com.ratings.app.helper.isErrors
+import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.AuthRepository
 import com.ratings.app.repository.NetworkState
 import com.ratings.app.type.LoginInput
@@ -118,14 +119,4 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
              else -> UserType.UNKNOWN__
          }
     }
-
-    private fun toggleProgressBarOnNetworkState(it: NetworkState, progressBar: ProgressBar) {
-        if(it == NetworkState.LOADING ) {
-            progressBar.visibility = View.VISIBLE
-        } else {
-            progressBar.visibility = View.GONE
-        }
-    }
-
-
 }
