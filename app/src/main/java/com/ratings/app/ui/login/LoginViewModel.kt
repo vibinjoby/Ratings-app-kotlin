@@ -23,7 +23,6 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
     }
 
     fun saveAccessToken(accessToken: String) {
-        RatingsApplication.get().login(accessToken)
         authRepository.saveAccessToken(accessToken)
     }
 

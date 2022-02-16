@@ -39,8 +39,6 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             findNavController().navigate(action)
         } else {
-            RatingsApplication.get().login(token!!)
-
             homeViewModel.restaurantList.observe(viewLifecycleOwner, {
                 val list = it?.edges?.map { edge ->
                     edge.node

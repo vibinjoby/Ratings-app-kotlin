@@ -2,15 +2,12 @@ package com.ratings.app.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ratings.app.di.usersession.PerUserSession
-import com.ratings.app.type.LoginInput
 import com.ratings.app.ui.home.HomeViewModel
 import com.ratings.app.ui.login.LoginViewModel
 import com.ratings.app.ui.viewmodels.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 import kotlin.reflect.KClass
 
