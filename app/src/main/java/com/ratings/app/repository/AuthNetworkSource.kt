@@ -8,8 +8,9 @@ import com.ratings.app.type.LoginInput
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
+import javax.inject.Inject
 
-class AuthNetworkSource(private val apiService: RatingsApiClient, private val compositeDisposable: CompositeDisposable) {
+class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiClient) {
     private val TAG = "AuthNetworkSource"
     private var _userToken =  MutableLiveData<String>()
     val userToken: LiveData<String>
@@ -19,7 +20,7 @@ class AuthNetworkSource(private val apiService: RatingsApiClient, private val co
     val networkState: LiveData<NetworkState>
         get() = _networkState
 
-    fun fetchAccessToken(loginInput: LoginInput) {
+    fun fetchAccessToken(loginInput: LoginInput, compositeDisposable: CompositeDisposable) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(

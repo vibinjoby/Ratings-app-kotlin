@@ -2,7 +2,9 @@ package com.ratings.app.di.modules
 
 import android.content.SharedPreferences
 import com.ratings.app.api.RatingsApiClient
+import com.ratings.app.repository.AuthNetworkSource
 import com.ratings.app.repository.AuthRepository
+import com.ratings.app.repository.HomeNetworkSource
 import com.ratings.app.repository.HomeRepository
 import dagger.Module
 import dagger.Provides
@@ -12,13 +14,13 @@ import javax.inject.Singleton
 class RepositoryModule {
     @Singleton
     @Provides
-    fun provideAuthRepository(apiClient: RatingsApiClient, preferences: SharedPreferences): AuthRepository {
-        return AuthRepository(preferences, apiClient )
+    fun provideAuthRepository(authNetworkSource: AuthNetworkSource, preferences: SharedPreferences): AuthRepository {
+        return AuthRepository(preferences, authNetworkSource )
     }
 
     @Singleton
     @Provides
-    fun provideHomeRepository(apiClient: RatingsApiClient) : HomeRepository {
-        return HomeRepository(apiClient)
+    fun provideHomeRepository(homeNetworkSource: HomeNetworkSource) : HomeRepository {
+        return HomeRepository(homeNetworkSource)
     }
  }

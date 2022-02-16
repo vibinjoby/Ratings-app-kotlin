@@ -8,12 +8,10 @@ import com.ratings.app.type.LoginInput
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class AuthRepository @Inject constructor(private val preferences: SharedPreferences,private val apiClient: RatingsApiClient) {
-    private lateinit var authNetworkSource: AuthNetworkSource
+class AuthRepository @Inject constructor(private val preferences: SharedPreferences,private val authNetworkSource: AuthNetworkSource) {
 
     fun authenticateUser(loginInput: LoginInput, compositeDisposable: CompositeDisposable): LiveData<String> {
-        authNetworkSource = AuthNetworkSource(apiClient, compositeDisposable)
-        authNetworkSource.fetchAccessToken(loginInput)
+        authNetworkSource.fetchAccessToken(loginInput, compositeDisposable)
         return authNetworkSource.userToken
     }
 

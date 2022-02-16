@@ -9,10 +9,8 @@ import dagger.android.AndroidInjector
 import dagger.android.DaggerApplication
 
 class RatingsApplication: DaggerApplication() {
-    private var applicationInjector: AppComponent? = DaggerAppComponent.builder()
-        .accessToken("")
+    private var applicationInjector: AppComponent = DaggerAppComponent.builder()
         .appModule(AppModule(this))
-        .loginInput(LoginInput("","",UserType.UNKNOWN__))
         .application(this).build()
 
     companion object {
@@ -27,21 +25,11 @@ class RatingsApplication: DaggerApplication() {
     }
 
     override fun applicationInjector(): AndroidInjector<out DaggerApplication> {
-        return applicationInjector!!
+        return applicationInjector
     }
 
     fun login(accessToken: String) {
         val module = UserSessionModule(accessToken)
-        applicationInjector?.createUserSessionComponent(module)
-    }
-
-    fun createLoginInput(loginInput: LoginInput) {
-        applicationInjector = null
-        applicationInjector = DaggerAppComponent.builder()
-            .accessToken("")
-            .loginInput(loginInput)
-            .appModule(AppModule(this))
-            .application(this)
-            .build()
+        applicationInjector.createUserSessionComponent(module)
     }
 }

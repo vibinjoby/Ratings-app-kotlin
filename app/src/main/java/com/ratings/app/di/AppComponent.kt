@@ -19,8 +19,6 @@ interface AppComponent: AndroidInjector<RatingsApplication> {
     @Component.Builder
     interface Builder {
         fun appModule(appModule: AppModule): Builder
-        @BindsInstance fun accessToken(accessToken: String): Builder
-        @BindsInstance fun loginInput(loginInput: LoginInput): Builder
         @BindsInstance fun application(application: RatingsApplication): Builder
         fun build(): AppComponent
     }

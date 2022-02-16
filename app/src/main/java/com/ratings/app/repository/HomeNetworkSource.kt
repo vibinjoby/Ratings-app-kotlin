@@ -9,8 +9,9 @@ import com.ratings.app.api.RatingsApiClient
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
+import javax.inject.Inject
 
-class HomeNetworkSource(private val apiService: RatingsApiClient, private val compositeDisposable: CompositeDisposable) {
+class HomeNetworkSource @Inject constructor(private val apiService: RatingsApiClient) {
     private val TAG = "HomeNetworkSource"
 
     private var _restaurantList =  MutableLiveData<RestaurantListQuery.GetRestaurants>()
@@ -21,7 +22,7 @@ class HomeNetworkSource(private val apiService: RatingsApiClient, private val co
     val networkState: LiveData<NetworkState>
         get() = _networkState
 
-    fun fetchAllRestaurants() {
+    fun fetchAllRestaurants(compositeDisposable: CompositeDisposable) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(

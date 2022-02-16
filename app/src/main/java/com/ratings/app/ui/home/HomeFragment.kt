@@ -32,13 +32,14 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.restaurant_list_rv)
+        val token = preferences.getString(KEY_ACCESS_TOKEN, "")
+
         // Navigate to login fragment if access token doesn't exist
-        if(!checkIfKeyExists()) {
+        if(token?.isNullOrBlank() == true) {
             val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             findNavController().navigate(action)
         } else {
-            val token = preferences.getString(KEY_ACCESS_TOKEN, "")!!
-            RatingsApplication.get().login(token)
+            RatingsApplication.get().login(token!!)
 
             homeViewModel.restaurantList.observe(viewLifecycleOwner, {
                 val list = it?.edges?.map { edge ->
@@ -50,9 +51,5 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             recyclerView.adapter = recyclerAdapter
         }
         return view
-    }
-
-    private fun checkIfKeyExists() : Boolean {
-        return preferences.getString(KEY_ACCESS_TOKEN, "")?.isNotBlank() ?: false
     }
 }

@@ -82,10 +82,8 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
 
                 if(emailValue.isNotBlank() && passwordValue.isNotBlank()) {
                     val loginInput = LoginInput(emailValue, passwordValue, fetchUserType(userType.text.toString()))
-                    RatingsApplication.get().clearComponent()
-                    RatingsApplication.get().createLoginInput(loginInput)
 
-                    authViewModel.accessToken.observe(this@LoginFragment.viewLifecycleOwner, {
+                    authViewModel.login(loginInput).observe(this@LoginFragment.viewLifecycleOwner, {
                         // Save the access token
                         authViewModel.saveAccessToken(it)
                         // Navigate to homePage
@@ -95,11 +93,7 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
 
                     authViewModel.networkState.observe(this@LoginFragment.viewLifecycleOwner, {
                         // Show progress bar based on network status
-                        if(it == NetworkState.LOADING ) {
-                            progressBar.visibility = View.VISIBLE
-                        } else {
-                            progressBar.visibility = View.GONE
-                        }
+                        toggleProgressBarOnNetworkState(it, progressBar)
                     })
                 }
             }
@@ -121,9 +115,16 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
             "Admin" -> UserType.admin
              "User" -> UserType.customer
              "Owner" -> UserType.owner
-
              else -> UserType.UNKNOWN__
          }
+    }
+
+    private fun toggleProgressBarOnNetworkState(it: NetworkState, progressBar: ProgressBar) {
+        if(it == NetworkState.LOADING ) {
+            progressBar.visibility = View.VISIBLE
+        } else {
+            progressBar.visibility = View.GONE
+        }
     }
 
 
