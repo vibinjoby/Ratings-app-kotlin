@@ -1,4 +1,4 @@
-package com.ratings.app.ui.home
+package com.ratings.app.ui.viewmodels
 
 import androidx.lifecycle.ViewModel
 import com.ratings.app.repository.HomeRepository

@@ -1,7 +1,6 @@
-package com.ratings.app.ui.login
+package com.ratings.app.ui.auth
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,33 +10,27 @@ import android.widget.RadioButton
 import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavDirections
 import androidx.navigation.fragment.findNavController
 import com.afollestad.vvalidator.form
 import com.google.android.material.textfield.TextInputLayout
 import com.ratings.app.R
-import com.ratings.app.api.AuthorizationInterceptor
-import com.ratings.app.api.RatingsApiClient
-import com.ratings.app.di.RatingsApplication
+import com.ratings.app.helper.fetchUserType
 import com.ratings.app.helper.isErrors
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
-import com.ratings.app.repository.AuthRepository
-import com.ratings.app.repository.NetworkState
 import com.ratings.app.repository.Status
 import com.ratings.app.type.LoginInput
-import com.ratings.app.type.UserType
 import com.ratings.app.ui.customviews.RadioGridGroup
+import com.ratings.app.ui.viewmodels.AuthViewModel
 import dagger.android.support.DaggerFragment
-import okhttp3.OkHttpClient
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment(R.layout.fragment_login) {
     private val TAG = "LoginFragment"
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
-    private val authViewModel: LoginViewModel by viewModels {
+    private val authViewModel: AuthViewModel by viewModels {
         viewModelFactory
     }
 
@@ -114,14 +107,5 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
 
     private fun navigateTo(action: NavDirections) {
         findNavController().navigate(action)
-    }
-
-    private fun fetchUserType(userType: String): UserType {
-         return when(userType) {
-            "Admin" -> UserType.admin
-             "User" -> UserType.customer
-             "Owner" -> UserType.owner
-             else -> UserType.UNKNOWN__
-         }
     }
 }

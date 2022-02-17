@@ -13,11 +13,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
-import com.ratings.app.di.RatingsApplication
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
-import com.ratings.app.repository.NetworkState
 import com.ratings.app.repository.Status
+import com.ratings.app.ui.viewmodels.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -40,6 +39,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.restaurant_list_rv)
         val token = preferences.getString(KEY_ACCESS_TOKEN, "")
+        println("stored token is $token")
 
         // Navigate to login fragment if access token doesn't exist
         if(token?.isNullOrBlank() == true) {

@@ -1,4 +1,4 @@
-package com.ratings.app.ui.login
+package com.ratings.app.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -7,11 +7,12 @@ import com.ratings.app.di.RatingsApplication
 import com.ratings.app.repository.AuthRepository
 import com.ratings.app.repository.HomeRepository
 import com.ratings.app.repository.NetworkState
+import com.ratings.app.type.CreateUserInput
 import com.ratings.app.type.LoginInput
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
+class AuthViewModel @Inject constructor(private val authRepository: AuthRepository): ViewModel() {
     private val compositeDisposable = CompositeDisposable()
 
     val networkState: LiveData<NetworkState> by lazy {
@@ -24,6 +25,10 @@ class LoginViewModel @Inject constructor(private val authRepository: AuthReposit
 
     fun saveAccessToken(accessToken: String) {
         authRepository.saveAccessToken(accessToken)
+    }
+
+    fun registerUser(createUserInput: CreateUserInput):LiveData<String> {
+        return authRepository.registerUser(createUserInput, compositeDisposable)
     }
 
     override fun onCleared() {
