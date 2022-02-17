@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import android.widget.RadioButton
+import android.widget.Toast
 import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
@@ -24,6 +25,7 @@ import com.ratings.app.helper.isErrors
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.AuthRepository
 import com.ratings.app.repository.NetworkState
+import com.ratings.app.repository.Status
 import com.ratings.app.type.LoginInput
 import com.ratings.app.type.UserType
 import com.ratings.app.ui.customviews.RadioGridGroup
@@ -93,6 +95,9 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
                     })
 
                     authViewModel.networkState.observe(this@LoginFragment.viewLifecycleOwner, {
+                        if(it.status == Status.FAILED) {
+                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+                        }
                         // Show progress bar based on network status
                         toggleProgressBarOnNetworkState(it, progressBar)
                     })

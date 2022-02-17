@@ -31,7 +31,9 @@ class HomeNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                     .subscribe (
                         {
                             _networkState.postValue(NetworkState.LOADED)
-                            _restaurantList.postValue(it.data?.getRestaurants)
+                            if(it.errors?.isNotEmpty() == true) {
+                                _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message))
+                            } else _restaurantList.postValue(it.data?.getRestaurants)
                         },{
                             _networkState.postValue(NetworkState.ERROR)
                             Log.e(TAG, it.toString())

@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ProgressBar
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -16,6 +17,7 @@ import com.ratings.app.di.RatingsApplication
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.NetworkState
+import com.ratings.app.repository.Status
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -54,13 +56,14 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             recyclerView.adapter = recyclerAdapter
 
             homeViewModel.networkState.observe(viewLifecycleOwner, {
-                // Show progress bar based on network status
-                toggleProgressBarOnNetworkState(it, progressBar)
                 // If any errors, navigate to login screen
-                if(it === NetworkState.ERROR) {
+                if(it.status == Status.FAILED) {
+                    Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
                     val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
                     findNavController().navigate(action)
                 }
+                // Show progress bar based on network status
+                toggleProgressBarOnNetworkState(it, progressBar)
             })
         }
         return view

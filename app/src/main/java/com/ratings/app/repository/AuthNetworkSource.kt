@@ -29,7 +29,9 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                     .subscribe (
                         {
                             _networkState.postValue(NetworkState.LOADED)
-                            _userToken.postValue(it.data?.login?.token)
+                            if(it.errors?.isNotEmpty() == true) {
+                                _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message ))
+                            } else _userToken.postValue(it.data?.login?.token)
                         },{
                             _networkState.postValue(NetworkState.ERROR)
                             Log.e(TAG, it.toString())
