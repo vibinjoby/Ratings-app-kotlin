@@ -25,19 +25,16 @@ class NetworkModule {
         return AuthorizationInterceptor(preferences.getString(KEY_ACCESS_TOKEN, "")?:"")
     }
 
-    @Singleton
     @Provides
     fun provideApiClient(okHttpClient: OkHttpClient): RatingsApiClient {
         return RatingsApiClient(okHttpClient)
     }
 
-    @Singleton
     @Provides
     fun provideAuthNetworkSource(apiClient: RatingsApiClient): AuthNetworkSource {
         return AuthNetworkSource(apiClient)
     }
 
-    @Singleton
     @Provides
     fun provideHomeNetworkSource(apiClient: RatingsApiClient): HomeNetworkSource {
         return HomeNetworkSource(apiClient)

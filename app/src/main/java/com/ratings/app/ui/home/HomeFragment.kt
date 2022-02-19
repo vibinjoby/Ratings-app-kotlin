@@ -2,13 +2,12 @@ package com.ratings.app.ui.home
 
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -16,6 +15,7 @@ import com.ratings.app.R
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.Status
+import com.ratings.app.ui.viewmodels.AuthViewModel
 import com.ratings.app.ui.viewmodels.HomeViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -27,11 +27,33 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
     private val homeViewModel: HomeViewModel by viewModels {
         viewModelFactory
     }
+    private val authViewModel: AuthViewModel by viewModels {
+        viewModelFactory
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.settings_menu, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when(item.itemId) {
+            R.id.logout_menu -> {
+                authViewModel.signout().observe(this, {
+                    val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                    findNavController().navigate(action)
+                })
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
 
@@ -39,7 +61,6 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
 
         val recyclerView = view.findViewById<RecyclerView>(R.id.restaurant_list_rv)
         val token = preferences.getString(KEY_ACCESS_TOKEN, "")
-        println("stored token is $token")
 
         // Navigate to login fragment if access token doesn't exist
         if(token?.isNullOrBlank() == true) {

@@ -1,9 +1,7 @@
 package com.ratings.app.ui.auth
 
 import android.os.Bundle
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
 import android.widget.ProgressBar
 import android.widget.RadioButton
 import android.widget.Toast
@@ -23,6 +21,7 @@ import com.ratings.app.ui.customviews.RadioGridGroup
 import com.ratings.app.ui.viewmodels.AuthViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
+import androidx.appcompat.app.AppCompatActivity
 
 class SignupFragment : DaggerFragment(R.layout.fragment_signup) {
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
@@ -34,8 +33,11 @@ class SignupFragment : DaggerFragment(R.layout.fragment_signup) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view =  inflater.inflate(R.layout.fragment_signup, container, false)
+
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
 
         val signUpBtn = view.findViewById<AppCompatButton>(R.id.signup_btn)
         val userTypeRadioGroup = view.findViewById<RadioGridGroup>(R.id.user_type)

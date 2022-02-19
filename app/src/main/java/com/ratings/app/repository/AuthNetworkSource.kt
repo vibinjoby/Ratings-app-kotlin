@@ -65,4 +65,8 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
             Log.e(TAG, e.toString())
         }
     }
+
+    fun clearToken() {
+        _userToken.postValue("")
+    }
 }

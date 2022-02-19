@@ -12,8 +12,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:usesCleartextTraffic="true">
+        <!--android:theme="@style/AppTheme.NoActionBar"-->
         <activity
-            android:theme="@style/AppTheme.NoActionBar"
+            android:theme="@style/Theme.AppCompat.DayNight"
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -31,6 +31,10 @@ class AuthViewModel @Inject constructor(private val authRepository: AuthReposito
         return authRepository.registerUser(createUserInput, compositeDisposable)
     }
 
+    fun signout():LiveData<String> {
+        return authRepository.signout()
+    }
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()

@@ -28,4 +28,10 @@ class AuthRepository @Inject constructor(private val preferences: SharedPreferen
     fun getAuthUserNetworkState(): LiveData<NetworkState> {
         return authNetworkSource.networkState
     }
+
+    fun signout(): LiveData<String> {
+        preferences.edit().putString(KEY_ACCESS_TOKEN, "").commit()
+        authNetworkSource.clearToken()
+        return authNetworkSource.userToken
+    }
 }
