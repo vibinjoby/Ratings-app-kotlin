@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
@@ -53,6 +54,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
