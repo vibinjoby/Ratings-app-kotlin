@@ -1,10 +1,12 @@
 package com.ratings.app.ui.home
 
 import android.content.SharedPreferences
+import android.os.Build
 import android.os.Bundle
 import android.view.*
 import android.widget.ProgressBar
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +16,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
+import com.ratings.app.helper.getDecodedJwt
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.Status
 import com.ratings.app.ui.viewmodels.AuthViewModel
@@ -50,6 +53,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         }
     }
 
+    @RequiresApi(Build.VERSION_CODES.O)
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -69,6 +73,7 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
             findNavController().navigate(action)
         } else {
+            val userInfo = getDecodedJwt(token)
             homeViewModel.restaurantList.observe(viewLifecycleOwner, {
                 val list = it?.edges?.map { edge ->
                     edge.node
