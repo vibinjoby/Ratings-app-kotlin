@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.apollographql.apollo3.api.Optional
+import com.ratings.app.MyRestaurantsQuery
 import com.ratings.app.RestaurantListQuery
 import com.ratings.app.api.RatingsApiClient
 import io.reactivex.disposables.CompositeDisposable
@@ -17,6 +18,10 @@ class HomeNetworkSource @Inject constructor(private val apiService: RatingsApiCl
     private var _restaurantList =  MutableLiveData<RestaurantListQuery.GetRestaurants>()
     val restaurantList: LiveData<RestaurantListQuery.GetRestaurants>
         get() = _restaurantList
+
+    private var _ownedRestaurantList = MutableLiveData<MyRestaurantsQuery.Data>()
+    val ownedRestaurantsList: LiveData<MyRestaurantsQuery.Data>
+        get() = _ownedRestaurantList
 
     private var _networkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState>
@@ -34,6 +39,30 @@ class HomeNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                             if(it.errors?.isNotEmpty() == true) {
                                 _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message))
                             } else _restaurantList.postValue(it.data?.getRestaurants)
+                        },{
+                            _networkState.postValue(NetworkState.ERROR)
+                            Log.e(TAG, it.toString())
+                        }
+                    )
+            )
+        } catch (e: Exception) {
+            _networkState.postValue(NetworkState.ERROR)
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    fun fetchOwnedRestaurants(compositeDisposable: CompositeDisposable) {
+        _networkState.postValue(NetworkState.LOADING)
+        try {
+            compositeDisposable.add(
+                apiService.fetchOwnedRestaurants()
+                    .subscribeOn(Schedulers.io())
+                    .subscribe (
+                        {
+                            _networkState.postValue(NetworkState.LOADED)
+                            if(it.errors?.isNotEmpty() == true) {
+                                _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message))
+                            } else _ownedRestaurantList.postValue(it.data)
                         },{
                             _networkState.postValue(NetworkState.ERROR)
                             Log.e(TAG, it.toString())

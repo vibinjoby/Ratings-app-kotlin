@@ -5,10 +5,7 @@ import com.apollographql.apollo3.api.ApolloResponse
 import com.apollographql.apollo3.api.Optional
 import com.apollographql.apollo3.network.okHttpClient
 import com.apollographql.apollo3.rx2.Rx2Apollo
-import com.ratings.app.AdminLoginMutation
-import com.ratings.app.LoginMutation
-import com.ratings.app.RegisterMutation
-import com.ratings.app.RestaurantListQuery
+import com.ratings.app.*
 import com.ratings.app.helper.API_URL
 import com.ratings.app.type.CreateAdminInput
 import com.ratings.app.type.CreateUserInput
@@ -41,6 +38,11 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
     fun registerUser(createUserInput: CreateUserInput): Single<ApolloResponse<RegisterMutation.Data>> {
         val registerMutation = RegisterMutation(createUserInput)
         val apolloCall = getClient().mutation(registerMutation)
+        return Rx2Apollo.flowable(apolloCall).firstOrError()
+    }
+
+    fun fetchOwnedRestaurants(): Single<ApolloResponse<MyRestaurantsQuery.Data>> {
+        val apolloCall = getClient().query(MyRestaurantsQuery())
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
 

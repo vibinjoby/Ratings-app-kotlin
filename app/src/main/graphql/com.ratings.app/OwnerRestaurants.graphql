@@ -1,0 +1,13 @@
+query MyRestaurants {
+    getOwnedrestaurants {
+        id
+        restaurantName
+        address
+        averageRatings
+        reviews {
+            id
+            ratings
+            comments
+        }
+    }
+}

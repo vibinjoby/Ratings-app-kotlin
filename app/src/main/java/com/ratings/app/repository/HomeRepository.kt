@@ -1,6 +1,7 @@
 package com.ratings.app.repository
 
 import androidx.lifecycle.LiveData
+import com.ratings.app.MyRestaurantsQuery
 import com.ratings.app.RestaurantListQuery
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
@@ -14,5 +15,10 @@ class HomeRepository @Inject constructor(private val homeNetworkSource: HomeNetw
 
     fun getHomeNetworkState(): LiveData<NetworkState> {
         return homeNetworkSource.networkState
+    }
+
+    fun fetchOwnedRestaurants(compositeDisposable: CompositeDisposable): LiveData<MyRestaurantsQuery.Data> {
+        homeNetworkSource.fetchOwnedRestaurants(compositeDisposable)
+        return homeNetworkSource.ownedRestaurantsList
     }
 }

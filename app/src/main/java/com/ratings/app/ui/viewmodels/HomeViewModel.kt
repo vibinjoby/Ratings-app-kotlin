@@ -12,6 +12,10 @@ class HomeViewModel @Inject constructor(private val repository: HomeRepository):
         repository.fetchRestaurants(compositeDisposable)
     }
 
+    val ownedRestaurants by lazy {
+        repository.fetchOwnedRestaurants(compositeDisposable)
+    }
+
     val networkState by lazy {
         repository.getHomeNetworkState()
     }

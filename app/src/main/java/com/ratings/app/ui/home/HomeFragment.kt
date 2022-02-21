@@ -13,11 +13,13 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ratings.app.R
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.helper.getDecodedJwt
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.Status
+import com.ratings.app.type.UserType
 import com.ratings.app.ui.customviews.AppAlertDialog
 import com.ratings.app.ui.viewmodels.AuthViewModel
 import com.ratings.app.ui.viewmodels.HomeViewModel
@@ -25,7 +27,6 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class HomeFragment : DaggerFragment(R.layout.fragment_home) {
-    private val recyclerAdapter = RestaurantListAdapter()
     @Inject lateinit var preferences: SharedPreferences
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private val homeViewModel: HomeViewModel by viewModels {
@@ -67,10 +68,10 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_home, container, false)
-
+        val addRestaurantBtn = view.findViewById<FloatingActionButton>(R.id.add_restaurant_btn)
         val progressBar = view.findViewById<ProgressBar>(R.id.home_progress_bar)
-
         val recyclerView = view.findViewById<RecyclerView>(R.id.restaurant_list_rv)
+
         val token = preferences.getString(KEY_ACCESS_TOKEN, "")
 
         // Navigate to login fragment if access token doesn't exist
@@ -79,18 +80,31 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             findNavController().navigate(action)
         } else {
             val userInfo = getDecodedJwt(token)
+            // Admins should land in their own home page
             if(userInfo.isAdmin) {
                 val action = HomeFragmentDirections.actionHomeFragmentToAdminHomeFragment()
                 findNavController().navigate(action)
             }
-            homeViewModel.restaurantList.observe(viewLifecycleOwner, {
-                val list = it?.edges?.map { edge ->
-                    edge.node
-                }
-                recyclerAdapter.submitList(list)
-            })
+            // Add restaurant button should be only visible for owners
+            if(userInfo.userType == UserType.customer.toString()) {
+                val recyclerAdapter = RestaurantListAdapter()
+                addRestaurantBtn.visibility = View.GONE
+
+                homeViewModel.restaurantList.observe(viewLifecycleOwner, {
+                    val list = it?.edges?.map { edge ->
+                        edge.node
+                    }
+                    recyclerAdapter.submitList(list)
+                })
+                recyclerView.adapter = recyclerAdapter
+            } else {
+                val recyclerAdapter = OwnedRestaurantListAdapter()
+                recyclerView.adapter = recyclerAdapter
+                homeViewModel.ownedRestaurants.observe(viewLifecycleOwner, {
+                    recyclerAdapter.submitList(it.getOwnedrestaurants)
+                })
+            }
             recyclerView.layoutManager = LinearLayoutManager(requireContext())
-            recyclerView.adapter = recyclerAdapter
 
             homeViewModel.networkState.observe(viewLifecycleOwner, {
                 // If any errors, navigate to login screen
