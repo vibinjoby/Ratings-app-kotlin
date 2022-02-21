@@ -13,4 +13,6 @@
     <color name="button_disabled">#E2E2E2</color>
     <color name="reviews_text">#808080</color>
     <color name="gray">#6D6D6D</color>
+    <color name="rating_selected_tint">#FF9500</color>
+    <color name="rating_unselected_tint">#C7C7CC</color>
 </resources>

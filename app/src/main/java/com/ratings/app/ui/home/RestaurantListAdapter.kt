@@ -4,6 +4,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.RatingBar
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -15,14 +16,17 @@ import com.ratings.app.helper.RESTAURANT_IMG_URL
 
 class RestaurantViewHolder(private val view: View): RecyclerView.ViewHolder(view) {
     private val restaurantName = view.findViewById<TextView>(R.id.restaurant_name_tv)
-    private val restaurantRatings = view.findViewById<TextView>(R.id.ratings_tv)
+    private val restaurantRatingText = view.findViewById<TextView>(R.id.rating_text)
+    private val restaurantRatingBar = view.findViewById<RatingBar>(R.id.rating_bar)
     private val restaurantNumOfReviews = view.findViewById<TextView>(R.id.reviews_tv)
     private val restaurantImage = view.findViewById<ImageView>(R.id.restaurant_iv)
 
     fun bind(restaurant: RestaurantListQuery.Node) {
         restaurantName.text = restaurant.restaurantName
-        restaurantRatings.text = restaurant.averageRatings.toString()
-        restaurantNumOfReviews.text = restaurant.reviewsCount.toString()
+        restaurantRatingText.text = restaurant.averageRatings.toString()
+        restaurantNumOfReviews.text = "${restaurant.reviewsCount} Reviews"
+        restaurantRatingBar.rating = restaurant.averageRatings.toFloat()
+        restaurantImage.clipToOutline = true
 
         Glide.with(view.context)
             .load(RESTAURANT_IMG_URL)

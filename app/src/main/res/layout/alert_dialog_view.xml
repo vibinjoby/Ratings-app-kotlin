@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="30dp"
+    android:background="@drawable/restaurant_image_bg"
+    android:clipToOutline="true"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/alert_title_tv"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        android:text="Are you sure you want to delete this user?"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="16sp"
+        android:textFontWeight="300"
+        android:textColor="#485167"
+        />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp"
+        android:gravity="center"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/alert_title_tv"
+        >
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alert_cancel_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="20dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/black"
+            android:background="@drawable/alert_cancel_button_bg"
+            android:text="Cancel"
+            android:layout_marginRight="20dp"
+            />
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/alert_yes_btn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Yes"
+            android:paddingVertical="10dp"
+            android:paddingHorizontal="25dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textColor="@color/white"
+            android:background="@drawable/alert_yes_button_bg"
+
+            />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

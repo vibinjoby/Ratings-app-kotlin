@@ -1,10 +1,10 @@
 package com.ratings.app.ui.admin
 
-import android.content.SharedPreferences
-import android.graphics.Rect
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -12,11 +12,11 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
 import com.ratings.app.helper.ADMIN_HOME_LIST
+import com.ratings.app.ui.customviews.AppAlertDialog
+import com.ratings.app.ui.home.HomeFragmentDirections
 import com.ratings.app.ui.viewmodels.AuthViewModel
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
-import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.DividerItemDecoration
 
 class AdminHomeFragment : DaggerFragment(R.layout.fragment_admin_home) {
 
@@ -34,10 +34,15 @@ class AdminHomeFragment : DaggerFragment(R.layout.fragment_admin_home) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.logout_menu -> {
-                authViewModel.signout().observe(this, {
-                    val action = AdminHomeFragmentDirections.actionAdminHomeFragmentToLoginFragment()
-                    findNavController().navigate(action)
-                })
+                val dialog = AppAlertDialog(this.requireContext()
+                    ,"Are you sure you want to logout?")
+                {
+                    authViewModel.signout().observe(this, {
+                        val action = AdminHomeFragmentDirections.actionAdminHomeFragmentToLoginFragment()
+                        findNavController().navigate(action)
+                    })
+                }
+                dialog.show()
                 true
             }
             else -> super.onOptionsItemSelected(item)

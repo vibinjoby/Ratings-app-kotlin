@@ -10,7 +10,6 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -19,6 +18,7 @@ import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.helper.getDecodedJwt
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.Status
+import com.ratings.app.ui.customviews.AppAlertDialog
 import com.ratings.app.ui.viewmodels.AuthViewModel
 import com.ratings.app.ui.viewmodels.HomeViewModel
 import dagger.android.support.DaggerFragment
@@ -43,10 +43,15 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when(item.itemId) {
             R.id.logout_menu -> {
-                authViewModel.signout().observe(this, {
-                    val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
-                    findNavController().navigate(action)
-                })
+                val dialog = AppAlertDialog(this.requireContext()
+                    ,"Are you sure you want to logout?")
+                    {
+                        authViewModel.signout().observe(this, {
+                            val action = HomeFragmentDirections.actionHomeFragmentToLoginFragment()
+                            findNavController().navigate(action)
+                        })
+                    }
+                dialog.show()
                 true
             }
             else -> super.onOptionsItemSelected(item)
