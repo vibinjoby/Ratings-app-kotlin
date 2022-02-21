@@ -16,6 +16,9 @@
         <action
             android:id="@+id/action_loginFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
@@ -37,5 +40,33 @@
         <action
             android:id="@+id/action_homeFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_adminHomeFragment"
+            app:destination="@id/adminHomeFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/adminHomeFragment"
+        android:name="com.ratings.app.ui.admin.AdminHomeFragment"
+        android:label="fragment_admin_home"
+        tools:layout="@layout/fragment_admin_home" >
+        <action
+            android:id="@+id/action_adminHomeFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_allUsersFragment"
+            app:destination="@id/allUsersFragment" />
+        <action
+            android:id="@+id/action_adminHomeFragment_to_allRestaurantsFragment"
+            app:destination="@id/allRestaurantsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/allRestaurantsFragment"
+        android:name="com.ratings.app.ui.admin.AllRestaurantsFragment"
+        android:label="fragment_all_restaurants"
+        tools:layout="@layout/fragment_all_restaurants" />
+    <fragment
+        android:id="@+id/allUsersFragment"
+        android:name="com.ratings.app.ui.admin.AllUsersFragment"
+        android:label="fragment_all_users"
+        tools:layout="@layout/fragment_all_users" />
 </navigation>

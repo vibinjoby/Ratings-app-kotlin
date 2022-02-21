@@ -32,8 +32,7 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
 
-    fun adminLogin(username: String, password: String): Single<ApolloResponse<AdminLoginMutation.Data>> {
-        val adminInput = CreateAdminInput(username,password)
+    fun adminLogin(adminInput: CreateAdminInput): Single<ApolloResponse<AdminLoginMutation.Data>> {
         val adminLoginMutation = AdminLoginMutation(adminInput)
         val apolloCall = getClient().mutation(adminLoginMutation)
         return Rx2Apollo.flowable(apolloCall).firstOrError()

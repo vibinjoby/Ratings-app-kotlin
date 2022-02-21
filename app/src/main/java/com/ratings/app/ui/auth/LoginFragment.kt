@@ -19,7 +19,9 @@ import com.ratings.app.helper.fetchUserType
 import com.ratings.app.helper.isErrors
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.Status
+import com.ratings.app.type.CreateAdminInput
 import com.ratings.app.type.LoginInput
+import com.ratings.app.type.UserType
 import com.ratings.app.ui.customviews.RadioGridGroup
 import com.ratings.app.ui.viewmodels.AuthViewModel
 import dagger.android.support.DaggerFragment
@@ -53,14 +55,13 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
 
             inputLayout(emailField) {
                 isNotEmpty()
-                isEmail()
                 onErrors{ _, errors ->
                     loginButton.isEnabled = !isErrors(errors)
                 }
             }
             inputLayout(passwordField) {
                 isNotEmpty()
-                length().greaterThan(8)
+                length().greaterThan(4)
                 onErrors{ _, errors ->
                     loginButton.isEnabled = !isErrors(errors)
                 }
@@ -78,15 +79,16 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
                 val userType = view.findViewById<RadioButton>(userTypeRadioGroup.checkedCheckableImageButtonId)
 
                 if(emailValue.isNotBlank() && passwordValue.isNotBlank()) {
-                    val loginInput = LoginInput(emailValue, passwordValue, fetchUserType(userType.text.toString()))
+                    val userType = fetchUserType(userType.text.toString())
 
-                    authViewModel.login(loginInput).observe(this@LoginFragment.viewLifecycleOwner, {
-                        // Save the access token
-                        authViewModel.saveAccessToken(it)
-                        // Navigate to homePage
-                        val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-                        navigateTo(action)
-                    })
+
+                    if(userType == UserType.admin) {
+                        val loginInput = CreateAdminInput(emailValue, passwordValue)
+                        observerAdminLogin(loginInput)
+                    } else {
+                        val loginInput = LoginInput(emailValue, passwordValue, userType)
+                        observeUserLogin(loginInput)
+                    }
 
                     authViewModel.networkState.observe(this@LoginFragment.viewLifecycleOwner, {
                         if(it.status == Status.FAILED) {
@@ -104,6 +106,26 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
             navigateTo(action)
         }
         return view
+    }
+
+    private fun observeUserLogin(loginInput: LoginInput) {
+        authViewModel.login(loginInput).observe(viewLifecycleOwner, {
+            // Save the access token
+            authViewModel.saveAccessToken(it)
+            // Navigate to homePage
+            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            navigateTo(action)
+        })
+    }
+
+    private fun observerAdminLogin(createAdminInput: CreateAdminInput) {
+        authViewModel.adminLogin(createAdminInput).observe(viewLifecycleOwner, {
+            // Save the access token
+            authViewModel.saveAccessToken(it)
+            // Navigate to homePage
+            val action = LoginFragmentDirections.actionLoginFragmentToAdminHomeFragment()
+            navigateTo(action)
+        })
     }
 
     private fun navigateTo(action: NavDirections) {

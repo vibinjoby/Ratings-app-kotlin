@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LiveData
 import com.ratings.app.api.RatingsApiClient
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
+import com.ratings.app.type.CreateAdminInput
 import com.ratings.app.type.CreateUserInput
 import com.ratings.app.type.LoginInput
 import io.reactivex.disposables.CompositeDisposable
@@ -13,6 +14,11 @@ class AuthRepository @Inject constructor(private val preferences: SharedPreferen
 
     fun authenticateUser(loginInput: LoginInput, compositeDisposable: CompositeDisposable): LiveData<String> {
         authNetworkSource.fetchAccessToken(loginInput, compositeDisposable)
+        return authNetworkSource.userToken
+    }
+
+    fun authenticateAdmin(loginInput: CreateAdminInput, compositeDisposable: CompositeDisposable): LiveData<String> {
+        authNetworkSource.fetchAccessTokenAsAdmin(loginInput, compositeDisposable)
         return authNetworkSource.userToken
     }
 

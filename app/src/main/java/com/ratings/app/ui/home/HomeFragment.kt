@@ -74,6 +74,10 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             findNavController().navigate(action)
         } else {
             val userInfo = getDecodedJwt(token)
+            if(userInfo.isAdmin) {
+                val action = HomeFragmentDirections.actionHomeFragmentToAdminHomeFragment()
+                findNavController().navigate(action)
+            }
             homeViewModel.restaurantList.observe(viewLifecycleOwner, {
                 val list = it?.edges?.map { edge ->
                     edge.node

@@ -1,5 +1,8 @@
 package com.ratings.app.di.modules
 
+import com.ratings.app.ui.admin.AdminHomeFragment
+import com.ratings.app.ui.admin.AllRestaurantsFragment
+import com.ratings.app.ui.admin.AllUsersFragment
 import com.ratings.app.ui.home.HomeFragment
 import com.ratings.app.ui.auth.LoginFragment
 import com.ratings.app.ui.auth.SignupFragment
@@ -16,4 +19,13 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeHomeFragment(): HomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAdminHomeFragment(): AdminHomeFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllUsersFragment(): AllUsersFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllRestaurantsFragment(): AllRestaurantsFragment
 }
