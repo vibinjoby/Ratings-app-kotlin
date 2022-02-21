@@ -6,6 +6,7 @@ import com.ratings.app.ui.admin.AllUsersFragment
 import com.ratings.app.ui.home.HomeFragment
 import com.ratings.app.ui.auth.LoginFragment
 import com.ratings.app.ui.auth.SignupFragment
+import com.ratings.app.ui.restaurant.AddRestaurantFragment
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
 
@@ -28,4 +29,7 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAllRestaurantsFragment(): AllRestaurantsFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAddRestaurantFragment(): AddRestaurantFragment
 }

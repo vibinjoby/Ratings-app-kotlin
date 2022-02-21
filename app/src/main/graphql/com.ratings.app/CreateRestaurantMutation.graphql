@@ -1,0 +1,5 @@
+mutation CreateRestaurant($createRestaurantInput: CreateRestaurantInput!) {
+    createRestaurant(createRestaurantInput: $createRestaurantInput) {
+        id
+    }
+}

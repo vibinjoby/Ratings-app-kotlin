@@ -98,6 +98,10 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
                 })
                 recyclerView.adapter = recyclerAdapter
             } else {
+                addRestaurantBtn.setOnClickListener {
+                    val action = HomeFragmentDirections.actionHomeFragmentToAddRestaurantFragment()
+                    findNavController().navigate(action)
+                }
                 val recyclerAdapter = OwnedRestaurantListAdapter()
                 recyclerView.adapter = recyclerAdapter
                 homeViewModel.ownedRestaurants.observe(viewLifecycleOwner, {

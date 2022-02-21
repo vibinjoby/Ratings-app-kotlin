@@ -7,10 +7,7 @@ import com.apollographql.apollo3.network.okHttpClient
 import com.apollographql.apollo3.rx2.Rx2Apollo
 import com.ratings.app.*
 import com.ratings.app.helper.API_URL
-import com.ratings.app.type.CreateAdminInput
-import com.ratings.app.type.CreateUserInput
-import com.ratings.app.type.LoginInput
-import com.ratings.app.type.UserType
+import com.ratings.app.type.*
 import io.reactivex.Single
 import okhttp3.OkHttpClient
 import javax.inject.Inject
@@ -49,6 +46,12 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
     fun fetchAllRestaurants(first: Optional<Double>, offset: Optional<Double>): Single<ApolloResponse<RestaurantListQuery.Data>> {
         val restaurantListQuery = RestaurantListQuery(first,offset)
         val apolloCall = getClient().query(restaurantListQuery)
+        return Rx2Apollo.flowable(apolloCall).firstOrError()
+    }
+
+    fun saveRestaurant(createRestaurantInput: CreateRestaurantInput): Single<ApolloResponse<CreateRestaurantMutation.Data>> {
+        val createRestaurantMutation = CreateRestaurantMutation(createRestaurantInput)
+        val apolloCall = getClient().mutation(createRestaurantMutation)
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
 }

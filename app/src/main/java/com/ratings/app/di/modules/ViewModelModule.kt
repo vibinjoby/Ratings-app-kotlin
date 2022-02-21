@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.ratings.app.ui.viewmodels.HomeViewModel
 import com.ratings.app.ui.viewmodels.AuthViewModel
+import com.ratings.app.ui.viewmodels.RestaurantViewModel
 import com.ratings.app.ui.viewmodels.ViewModelFactory
 import dagger.Binds
 import dagger.MapKey
@@ -22,6 +23,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(AuthViewModel::class)
     abstract fun bindAuthViewModel(loginViewModel: AuthViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(RestaurantViewModel::class)
+    abstract fun bindRestaurantViewModel(restaurantViewModel: RestaurantViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory ):ViewModelProvider.Factory
