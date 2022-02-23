@@ -4,6 +4,7 @@
     android:layout_height="wrap_content"
     android:paddingHorizontal="16dp"
     android:paddingVertical="10dp"
+    android:clickable="true"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <ImageView

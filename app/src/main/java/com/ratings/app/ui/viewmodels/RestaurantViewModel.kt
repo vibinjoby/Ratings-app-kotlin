@@ -2,6 +2,7 @@ package com.ratings.app.ui.viewmodels
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.ViewModel
+import com.ratings.app.RestaurantDetailsQuery
 import com.ratings.app.repository.NetworkState
 import com.ratings.app.repository.RestaurantRepository
 import com.ratings.app.type.CreateRestaurantInput
@@ -17,6 +18,10 @@ class RestaurantViewModel @Inject constructor(private val repository: Restaurant
 
     fun saveRestaurant(createRestaurantInput: CreateRestaurantInput) {
         repository.saveRestaurant(compositeDisposable,createRestaurantInput)
+    }
+
+    fun getRestaurantDetails(id: Int): LiveData<RestaurantDetailsQuery.Data> {
+        return repository.getRestaurantDetails(compositeDisposable, id)
     }
 
     override fun onCleared() {

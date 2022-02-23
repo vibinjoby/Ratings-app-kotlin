@@ -1,0 +1,5 @@
+mutation SaveReviewReplyMutation($reviewId: Int!, $ownerReply: String!) {
+    createOwnerReply(reviewId: $reviewId, ownerReply: $ownerReply) {
+        id
+    }
+}

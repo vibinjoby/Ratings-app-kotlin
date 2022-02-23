@@ -46,6 +46,9 @@
         <action
             android:id="@+id/action_homeFragment_to_addRestaurantFragment"
             app:destination="@id/addRestaurantFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_restaurantDetailsFragment"
+            app:destination="@id/restaurantDetailsFragment" />
     </fragment>
     <fragment
         android:id="@+id/adminHomeFragment"
@@ -80,5 +83,18 @@
         <action
             android:id="@+id/action_addRestaurantFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/restaurantDetailsFragment"
+        android:name="com.ratings.app.ui.restaurant.RestaurantDetailsFragment"
+        android:label="fragment_restaurant_details"
+        tools:layout="@layout/fragment_restaurant_details" >
+        <action
+            android:id="@+id/action_restaurantDetailsFragment_to_homeFragment"
+            app:destination="@id/homeFragment" />
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
     </fragment>
 </navigation>

@@ -87,7 +87,9 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             }
             // Add restaurant button should be only visible for owners
             if(userInfo.userType == UserType.customer.toString()) {
-                val recyclerAdapter = RestaurantListAdapter()
+                val recyclerAdapter = RestaurantListAdapter {
+                    navigateToDetails(it.id)
+                }
                 addRestaurantBtn.visibility = View.GONE
 
                 homeViewModel.restaurantList.observe(viewLifecycleOwner, {
@@ -102,7 +104,9 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
                     val action = HomeFragmentDirections.actionHomeFragmentToAddRestaurantFragment()
                     findNavController().navigate(action)
                 }
-                val recyclerAdapter = OwnedRestaurantListAdapter()
+                val recyclerAdapter = OwnedRestaurantListAdapter {
+                    navigateToDetails(it.id)
+                }
                 recyclerView.adapter = recyclerAdapter
                 homeViewModel.ownedRestaurants.observe(viewLifecycleOwner, {
                     recyclerAdapter.submitList(it.getOwnedrestaurants)
@@ -122,5 +126,10 @@ class HomeFragment : DaggerFragment(R.layout.fragment_home) {
             })
         }
         return view
+    }
+
+    private fun navigateToDetails(id: Int) {
+        val action = HomeFragmentDirections.actionHomeFragmentToRestaurantDetailsFragment(id)
+        findNavController().navigate(action)
     }
 }

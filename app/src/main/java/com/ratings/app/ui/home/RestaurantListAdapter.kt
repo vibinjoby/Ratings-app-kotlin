@@ -23,7 +23,7 @@ class RestaurantViewHolder(private val view: View): RecyclerView.ViewHolder(view
 
     fun bind(restaurant: RestaurantListQuery.Node) {
         restaurantName.text = restaurant.restaurantName
-        restaurantRatingText.text = restaurant.averageRatings.toString()
+        restaurantRatingText.text = restaurant.averageRatings.toInt().toString()
         restaurantNumOfReviews.text = "${restaurant.reviewsCount} Reviews"
         restaurantRatingBar.rating = restaurant.averageRatings.toFloat()
         restaurantImage.clipToOutline = true
@@ -34,7 +34,7 @@ class RestaurantViewHolder(private val view: View): RecyclerView.ViewHolder(view
     }
 }
 
-class RestaurantListAdapter: ListAdapter<RestaurantListQuery.Node, RestaurantViewHolder>(DIFF_CONFIG) {
+class RestaurantListAdapter(private val clickHandler:(restaurant: RestaurantListQuery.Node)->Unit): ListAdapter<RestaurantListQuery.Node, RestaurantViewHolder>(DIFF_CONFIG) {
     companion object {
         val DIFF_CONFIG  = object: DiffUtil.ItemCallback<RestaurantListQuery.Node>() {
             override fun areItemsTheSame(
@@ -61,5 +61,8 @@ class RestaurantListAdapter: ListAdapter<RestaurantListQuery.Node, RestaurantVie
 
     override fun onBindViewHolder(holder: RestaurantViewHolder, position: Int) {
         holder.bind(getItem(position))
+        holder.itemView.setOnClickListener {
+            clickHandler(getItem(position))
+        }
     }
 }
