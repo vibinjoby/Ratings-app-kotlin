@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="16dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <ImageView
+        android:id="@+id/user_iv"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:src="@drawable/user_review"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        />
+
+    <TextView
+        android:id="@+id/customer_name_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:textSize="18dp"
+        android:fontFamily="@font/poppins_bold"
+        android:textColor="@color/black"
+        app:layout_constraintLeft_toRightOf="@id/user_iv"
+        app:layout_constraintTop_toTopOf="parent"
+        android:text="Chinchu emee"
+        />
+
+
+    <androidx.appcompat.widget.AppCompatRatingBar
+        android:id="@+id/rating_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:numStars="5"
+        android:stepSize="0.5"
+        android:clickable="false"
+        android:progressTint="@color/rating_selected_tint"
+        android:progressBackgroundTint="@color/rating_unselected_tint"
+        style="@style/Widget.AppCompat.RatingBar.Small"
+        android:theme="@style/Widget.AppCompat.RatingBar"
+        app:layout_constraintTop_toBottomOf="@id/customer_name_tv"
+        app:layout_constraintLeft_toLeftOf="@id/customer_name_tv"
+        />
+
+    <TextView
+        android:id="@+id/review_date_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintBottom_toBottomOf="@id/customer_name_tv"
+        android:text="16th Dec, 1995"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="10dp"
+        />
+
+    <TextView
+        android:id="@+id/review_tv"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Good food with good price"
+        android:layout_marginTop="2dp"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="18dp"
+        android:textColor="#181725"
+        app:layout_constraintLeft_toLeftOf="@id/rating_bar"
+        app:layout_constraintTop_toBottomOf="@id/rating_bar"
+        />
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/business_owner_reply_layout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:paddingLeft="10dp"
+        android:visibility="gone"
+        android:background="@drawable/owner_reply_bg"
+        app:layout_constraintTop_toBottomOf="@id/review_tv"
+        app:layout_constraintLeft_toLeftOf="@id/review_tv"
+        >
+        <ImageView
+            android:id="@+id/business_owner_iv"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/guest_pic"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            />
+        <TextView
+            android:id="@+id/business_owner_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textSize="14dp"
+            android:fontFamily="@font/poppins_bold"
+            android:textColor="@color/black"
+            app:layout_constraintLeft_toRightOf="@id/business_owner_iv"
+            app:layout_constraintTop_toTopOf="@id/business_owner_iv"
+            app:layout_constraintBottom_toBottomOf="@id/business_owner_iv"
+            android:text="Business owner"
+            />
+        <TextView
+            android:id="@+id/owner_reply_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Good food with good price"
+            android:layout_marginTop="5dp"
+            android:fontFamily="@font/poppins_regular"
+            android:textSize="14dp"
+            android:textColor="#181725"
+            app:layout_constraintTop_toBottomOf="@id/business_owner_tv"
+            app:layout_constraintLeft_toLeftOf="parent"
+           />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

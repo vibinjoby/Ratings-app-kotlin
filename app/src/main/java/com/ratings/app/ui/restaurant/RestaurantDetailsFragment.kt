@@ -16,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.ratings.app.R
@@ -53,12 +55,14 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
         val ratingsTv = view.findViewById<TextView>(R.id.rating_tv)
         val reviewsHeader = view.findViewById<TextView>(R.id.reviews_header_tv)
         val noReviewsLayout = view.findViewById<LinearLayout>(R.id.no_reviews_layout)
+        val reviewRv = view.findViewById<RecyclerView>(R.id.reviews_rv)
 
         val token = preferences.getString(KEY_ACCESS_TOKEN,"")!!
         val userType = getDecodedJwt(token).userType
 
         restaurantViewModel.getRestaurantDetails(args.id)
             .observe(viewLifecycleOwner, {
+                val reviewAdapter = ReviewListAdapter()
                 Glide.with(this)
                     .load(RESTAURANT_IMG_URL)
                     .into(restaurantIv)
@@ -70,9 +74,14 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
                 } else {
                     addReviewBtn.visibility = View.GONE
                 }
+
                 if(it.getRestaurant.reviews?.isEmpty() == true) {
                     reviewsHeader.visibility = View.GONE
                     noReviewsLayout.visibility = View.VISIBLE
+                } else {
+                    reviewAdapter.submitList(it.getRestaurant.reviews)
+                    reviewRv.adapter = reviewAdapter
+                    reviewRv.layoutManager = LinearLayoutManager(requireContext())
                 }
             })
 
