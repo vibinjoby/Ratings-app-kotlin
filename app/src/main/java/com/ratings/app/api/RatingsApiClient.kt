@@ -55,6 +55,12 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
 
+    fun saveReview(createReviewInput: CreateReviewInput): Single<ApolloResponse<CreateReviewMutation.Data>> {
+        val createReviewMutation = CreateReviewMutation(createReviewInput)
+        val apolloCall = getClient().mutation(createReviewMutation)
+        return Rx2Apollo.flowable(apolloCall).firstOrError()
+    }
+
     fun getRestaurantDetails(id: Int): Single<ApolloResponse<RestaurantDetailsQuery.Data>> {
         val query = RestaurantDetailsQuery(id)
         val apolloCall = getClient().query(query)

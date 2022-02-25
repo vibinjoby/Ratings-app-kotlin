@@ -15,6 +15,7 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -60,6 +61,10 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
         val token = preferences.getString(KEY_ACCESS_TOKEN,"")!!
         val userType = getDecodedJwt(token).userType
 
+        addReviewBtn.setOnClickListener {
+            val action = RestaurantDetailsFragmentDirections.actionRestaurantDetailsFragmentToAddReviewFragment(args.id)
+            findNavController().navigate(action)
+        }
         restaurantViewModel.getRestaurantDetails(args.id)
             .observe(viewLifecycleOwner, {
                 val reviewAdapter = ReviewListAdapter()

@@ -14,6 +14,7 @@
         <entry key="app/src/main/res/drawable/btn1_selector.xml" value="0.13541666666666666" />
         <entry key="app/src/main/res/drawable/divider_gray.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/ic_add_circle.xml" value="0.13645833333333332" />
+        <entry key="app/src/main/res/drawable/mutiline_input_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/owner_reply_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/restaurant_image_bg.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/restaurant_iv_bg.xml" value="0.13645833333333332" />
@@ -36,10 +37,11 @@
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11927083333333334" />
         <entry key="app/src/main/res/layout/alert_dialog_view.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_add_restaurant.xml" value="0.19972826086956522" />
+        <entry key="app/src/main/res/layout/fragment_add_review.xml" value="0.18704710144927536" />
         <entry key="app/src/main/res/layout/fragment_admin_home.xml" value="0.25" />
         <entry key="app/src/main/res/layout/fragment_home.xml" value="0.125" />
         <entry key="app/src/main/res/layout/fragment_login.xml" value="0.22860298177802318" />
-        <entry key="app/src/main/res/layout/fragment_restaurant_details.xml" value="0.125" />
+        <entry key="app/src/main/res/layout/fragment_restaurant_details.xml" value="0.165" />
         <entry key="app/src/main/res/layout/fragment_signup.xml" value="0.1" />
         <entry key="app/src/main/res/layout/item_admin_home.xml" value="0.19972826086956522" />
         <entry key="app/src/main/res/layout/item_restaurant.xml" value="0.165" />

@@ -6,6 +6,7 @@ import com.ratings.app.RestaurantDetailsQuery
 import com.ratings.app.repository.NetworkState
 import com.ratings.app.repository.RestaurantRepository
 import com.ratings.app.type.CreateRestaurantInput
+import com.ratings.app.type.CreateReviewInput
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -22,6 +23,10 @@ class RestaurantViewModel @Inject constructor(private val repository: Restaurant
 
     fun getRestaurantDetails(id: Int): LiveData<RestaurantDetailsQuery.Data> {
         return repository.getRestaurantDetails(compositeDisposable, id)
+    }
+
+    fun saveReview(createReviewInput: CreateReviewInput) {
+        repository.createReview(compositeDisposable,createReviewInput)
     }
 
     override fun onCleared() {
