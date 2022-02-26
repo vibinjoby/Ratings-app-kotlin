@@ -29,6 +29,10 @@ class RestaurantViewModel @Inject constructor(private val repository: Restaurant
         repository.createReview(compositeDisposable,createReviewInput)
     }
 
+    fun saveOwnerResponse(restaurantId: Int, reviewId: Int, reply: String) {
+        repository.saveOwnerReply(compositeDisposable, restaurantId, reviewId, reply)
+    }
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()

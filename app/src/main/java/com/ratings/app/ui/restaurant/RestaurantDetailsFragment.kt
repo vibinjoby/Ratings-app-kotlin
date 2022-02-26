@@ -68,7 +68,9 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
         }
         restaurantViewModel.getRestaurantDetails(args.id)
             .observe(viewLifecycleOwner, {
-                val reviewAdapter = ReviewListAdapter(userType)
+                val reviewAdapter = ReviewListAdapter(userType) { reviewId, reply ->
+                    restaurantViewModel.saveOwnerResponse(args.id, reviewId,reply )
+                }
                 Glide.with(this)
                     .load(RESTAURANT_IMG_URL)
                     .into(restaurantIv)

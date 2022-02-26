@@ -77,4 +77,24 @@ class RestaurantNetworkSource @Inject constructor(private val apiService: Rating
             _networkState.postValue(NetworkState(Status.FAILED, e.message!! ))
         }
     }
+
+    fun saveReviewReply(compositeDisposable: CompositeDisposable,restaurantId: Int, reviewId: Int, reply: String) {
+        _networkState.postValue(NetworkState.LOADING)
+        try {
+            compositeDisposable.add(
+                apiService.saveOwnerReplyReview(reviewId, reply)
+                    .subscribe(
+                        {
+                            _networkState.postValue(NetworkState.LOADED)
+                            getRestaurantDetails(compositeDisposable, restaurantId)
+                        },
+                        {
+                            _networkState.postValue(NetworkState(Status.FAILED, it.message!! ))
+                        }
+                    )
+            )
+        } catch (e: Exception) {
+
+        }
+    }
 }

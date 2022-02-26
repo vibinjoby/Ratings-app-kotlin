@@ -24,4 +24,8 @@ class RestaurantRepository @Inject constructor(private val networkSource: Restau
     fun createReview(compositeDisposable: CompositeDisposable, createReviewInput: CreateReviewInput) {
         networkSource.createReview(compositeDisposable, createReviewInput)
     }
+
+    fun saveOwnerReply(compositeDisposable: CompositeDisposable,restaurantId: Int, reviewId: Int, reply: String) {
+        networkSource.saveReviewReply(compositeDisposable, restaurantId, reviewId, reply)
+    }
 }
