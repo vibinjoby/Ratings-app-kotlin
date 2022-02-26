@@ -15,6 +15,8 @@ import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.afollestad.vvalidator.util.onTextChanged
 import com.ratings.app.R
+import com.ratings.app.helper.toggleProgressBarOnNetworkState
+import com.ratings.app.repository.NetworkState
 import com.ratings.app.type.CreateReviewInput
 import com.ratings.app.ui.viewmodels.RestaurantViewModel
 import com.ratings.app.ui.viewmodels.ViewModelFactory
@@ -51,8 +53,13 @@ class AddReviewFragment : DaggerFragment(R.layout.fragment_add_review) {
         saveReviewButton.setOnClickListener {
             val createReviewInput = CreateReviewInput(ratings.rating.toDouble(), Date().toString(), reviewEt.text.toString(), args.id)
             restaurantViewModel.saveReview(createReviewInput)
-            findNavController().navigateUp()
         }
+
+        restaurantViewModel.networkState.observe(viewLifecycleOwner, {
+            if(it == NetworkState.LOADED) {
+                findNavController().navigateUp()
+            }
+        })
         return view
     }
 }
