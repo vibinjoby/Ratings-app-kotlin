@@ -68,6 +68,49 @@
         app:layout_constraintTop_toBottomOf="@id/rating_bar"
         />
 
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/review_reply_btn"
+        android:visibility="gone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/review_tv"
+        android:text="Reply"
+        android:background="@android:color/transparent"
+        android:textColor="@color/textHint"
+        android:fontFamily="@font/poppins_regular"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toLeftOf="@id/review_tv"
+        />
+
+    <LinearLayout
+        android:id="@+id/owner_reply_layout"
+        android:visibility="gone"
+        android:layout_width="0dp"
+        android:orientation="horizontal"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@id/review_tv"
+        app:layout_constraintLeft_toLeftOf="@id/review_tv"
+        app:layout_constraintRight_toRightOf="@id/review_date_tv"
+        >
+        <EditText
+            android:layout_weight="1"
+            android:background="@drawable/owner_reply_edit_text_bg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="10dp"
+            android:layout_gravity="center_vertical"
+            android:hint="Type Reply..."
+            android:layout_marginRight="10dp"
+            />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_gravity="fill_vertical"
+            android:scaleType="centerCrop"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:background="@drawable/send" />
+    </LinearLayout>
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/business_owner_reply_layout"
         android:layout_width="wrap_content"

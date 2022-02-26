@@ -16,6 +16,7 @@
         <entry key="app/src/main/res/drawable/ic_add_circle.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/mutiline_input_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/owner_reply_bg.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/owner_reply_edit_text_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/restaurant_image_bg.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/restaurant_iv_bg.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/restaurant_stars_bg.xml" value="0.25416666666666665" />

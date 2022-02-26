@@ -13,6 +13,7 @@ import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.AppCompatButton
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -67,18 +68,12 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
         }
         restaurantViewModel.getRestaurantDetails(args.id)
             .observe(viewLifecycleOwner, {
-                val reviewAdapter = ReviewListAdapter()
+                val reviewAdapter = ReviewListAdapter(userType)
                 Glide.with(this)
                     .load(RESTAURANT_IMG_URL)
                     .into(restaurantIv)
                 restaurantName.text = it.getRestaurant.restaurantName
                 ratingsTv.text = it.getRestaurant.averageRatings.toInt().toString()
-
-                if(userType == UserType.customer.toString()) {
-                    addReviewBtn.visibility = View.VISIBLE
-                } else {
-                    addReviewBtn.visibility = View.GONE
-                }
 
                 if(it.getRestaurant.reviews?.isEmpty() == true) {
                     reviewsHeader.visibility = View.GONE
@@ -87,6 +82,12 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
                     reviewAdapter.submitList(it.getRestaurant.reviews)
                     reviewRv.adapter = reviewAdapter
                     reviewRv.layoutManager = LinearLayoutManager(requireContext())
+                }
+
+                if(userType == UserType.customer.toString()) {
+                    addReviewBtn.visibility = View.VISIBLE
+                } else {
+                    addReviewBtn.visibility = View.GONE
                 }
             })
 
