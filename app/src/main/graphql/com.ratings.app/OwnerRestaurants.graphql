@@ -4,10 +4,6 @@ query MyRestaurants {
         restaurantName
         address
         averageRatings
-        reviews {
-            id
-            ratings
-            comments
-        }
+        reviewsCount
     }
 }

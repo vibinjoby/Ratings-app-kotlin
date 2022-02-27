@@ -25,7 +25,7 @@ class OwnedRestaurantViewHolder(private val view: View): RecyclerView.ViewHolder
     fun bind(restaurant: MyRestaurantsQuery.GetOwnedrestaurant) {
         restaurantName.text = restaurant.restaurantName
         restaurantRatingText.text = restaurant.averageRatings.toInt().toString()
-        restaurantNumOfReviews.text = "${restaurant.reviews?.size ?: 0} Reviews"
+        restaurantNumOfReviews.text = "${restaurant.reviewsCount} Reviews"
         restaurantRatingBar.rating = restaurant.averageRatings.toFloat()
         restaurantImage.clipToOutline = true
 
