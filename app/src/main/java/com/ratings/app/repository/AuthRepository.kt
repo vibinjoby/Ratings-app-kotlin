@@ -12,32 +12,27 @@ import javax.inject.Inject
 
 class AuthRepository @Inject constructor(private val preferences: SharedPreferences,private val authNetworkSource: AuthNetworkSource) {
 
-    fun authenticateUser(loginInput: LoginInput, compositeDisposable: CompositeDisposable): LiveData<String> {
-        authNetworkSource.fetchAccessToken(loginInput, compositeDisposable)
-        return authNetworkSource.userToken
+    fun authenticateUser(loginInput: LoginInput, compositeDisposable: CompositeDisposable, loginCallBack: AuthNetworkSource.LoginCallBack) {
+        authNetworkSource.fetchAccessToken(loginInput, compositeDisposable, loginCallBack)
     }
 
-    fun authenticateAdmin(loginInput: CreateAdminInput, compositeDisposable: CompositeDisposable): LiveData<String> {
-        authNetworkSource.fetchAccessTokenAsAdmin(loginInput, compositeDisposable)
-        return authNetworkSource.userToken
+    fun authenticateAdmin(loginInput: CreateAdminInput, compositeDisposable: CompositeDisposable, loginCallBack: AuthNetworkSource.LoginCallBack) {
+        authNetworkSource.fetchAccessTokenAsAdmin(loginInput, compositeDisposable, loginCallBack)
     }
 
     fun saveAccessToken(accessToken: String) {
         preferences.edit().putString(KEY_ACCESS_TOKEN, accessToken).commit()
     }
 
-    fun registerUser(createUserInput: CreateUserInput, compositeDisposable: CompositeDisposable): LiveData<String> {
-        authNetworkSource.createUser(createUserInput, compositeDisposable )
-        return authNetworkSource.userToken
+    fun registerUser(createUserInput: CreateUserInput, compositeDisposable: CompositeDisposable, loginCallBack: AuthNetworkSource.LoginCallBack) {
+        authNetworkSource.createUser(createUserInput, compositeDisposable, loginCallBack )
     }
 
     fun getAuthUserNetworkState(): LiveData<NetworkState> {
         return authNetworkSource.networkState
     }
 
-    fun signout(): LiveData<String> {
+    fun signout() {
         preferences.edit().putString(KEY_ACCESS_TOKEN, "").commit()
-        authNetworkSource.clearToken()
-        return authNetworkSource.userToken
     }
 }

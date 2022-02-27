@@ -37,10 +37,9 @@ class AdminHomeFragment : DaggerFragment(R.layout.fragment_admin_home) {
                 val dialog = AppAlertDialog(this.requireContext()
                     ,"Are you sure you want to logout?")
                 {
-                    authViewModel.signout().observe(this, {
-                        val action = AdminHomeFragmentDirections.actionAdminHomeFragmentToLoginFragment()
-                        findNavController().navigate(action)
-                    })
+                    authViewModel.signout()
+                    val action = AdminHomeFragmentDirections.actionAdminHomeFragmentToLoginFragment()
+                    findNavController().navigate(action)
                 }
                 dialog.show()
                 true

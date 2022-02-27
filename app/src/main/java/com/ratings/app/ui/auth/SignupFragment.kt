@@ -85,24 +85,23 @@ class SignupFragment : DaggerFragment(R.layout.fragment_signup) {
                 val createUserInput = CreateUserInput(emailValue,
                     usernameValue, passwordValue, fetchUserType(userType.text.toString()))
 
-                authViewModel.registerUser(createUserInput).observe(viewLifecycleOwner, {
-                    println("created token is $it")
-                    // Save the access token
-                    authViewModel.saveAccessToken(it)
-                    // Navigate to homePage
-                    val action = SignupFragmentDirections.actionSignupFragmentToHomeFragment()
-                    navigateTo(action)
-                })
-
-                authViewModel.networkState.observe(this@SignupFragment.viewLifecycleOwner, {
-                    if(it.status == Status.FAILED) {
-                        Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                    }
-                    // Show progress bar based on network status
-                    toggleProgressBarOnNetworkState(it, progressBar)
-                })
+                authViewModel.registerUser(createUserInput)
             }
         }
+
+        authViewModel.networkState.observe(viewLifecycleOwner, {
+            if(it.status == Status.FAILED) {
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+            // Show progress bar based on network status
+            toggleProgressBarOnNetworkState(it, progressBar)
+        })
+
+        authViewModel.userToken.observe(viewLifecycleOwner, {
+            // Navigate to homePage
+            val action = SignupFragmentDirections.actionSignupFragmentToHomeFragment()
+            navigateTo(action)
+        })
 
         view.findViewById<AppCompatButton>(R.id.signin_btn).setOnClickListener {
             val action = SignupFragmentDirections.actionSignupFragmentToLoginFragment()

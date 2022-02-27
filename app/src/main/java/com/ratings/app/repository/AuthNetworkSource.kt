@@ -13,10 +13,12 @@ import java.lang.Exception
 import javax.inject.Inject
 
 class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiClient) {
+    interface LoginCallBack {
+        fun onSuccess(token: String?);
+        fun onError(message: String?)
+    }
+
     private val TAG = "AuthNetworkSource"
-    private var _userToken =  MutableLiveData<String>()
-    val userToken: LiveData<String>
-        get() = _userToken
 
     private var _networkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState>
@@ -27,7 +29,7 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
         Log.e(TAG, it.toString())
     }
 
-    fun fetchAccessToken(loginInput: LoginInput, compositeDisposable: CompositeDisposable) {
+    fun fetchAccessToken(loginInput: LoginInput, compositeDisposable: CompositeDisposable, loginCallBack: LoginCallBack) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(
@@ -37,7 +39,8 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                         _networkState.postValue(NetworkState.LOADED)
                         if(it.errors?.isNotEmpty() == true) {
                             _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message ))
-                        } else _userToken.postValue(it.data?.login?.token)
+                            loginCallBack.onError(it.errors!![0].message)
+                        } else loginCallBack.onSuccess(it.data?.login?.token)
                     },{ onFailure(it) })
             )
         } catch (e: Exception) {
@@ -46,7 +49,7 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
         }
     }
 
-    fun createUser(createUserInput: CreateUserInput, compositeDisposable: CompositeDisposable) {
+    fun createUser(createUserInput: CreateUserInput, compositeDisposable: CompositeDisposable, loginCallBack: AuthNetworkSource.LoginCallBack) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(
@@ -56,8 +59,8 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                             {
                                 _networkState.postValue(NetworkState.LOADED)
                                 if(it.errors?.isNotEmpty() == true) {
-                                    _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message ))
-                                } else _userToken.postValue(it.data?.createUser?.token)
+                                    loginCallBack.onError(it.errors!![0].message)
+                                } else loginCallBack.onSuccess(it.data?.createUser?.token)
                             }, { onFailure(it) }
                     )
             )
@@ -67,7 +70,7 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
         }
     }
 
-    fun fetchAccessTokenAsAdmin(loginInput: CreateAdminInput, compositeDisposable: CompositeDisposable) {
+    fun fetchAccessTokenAsAdmin(loginInput: CreateAdminInput, compositeDisposable: CompositeDisposable, loginCallBack: LoginCallBack) {
         _networkState.postValue(NetworkState.LOADING)
         try {
             compositeDisposable.add(
@@ -76,17 +79,13 @@ class AuthNetworkSource @Inject constructor(private val apiService: RatingsApiCl
                     .subscribe ({
                         _networkState.postValue(NetworkState.LOADED)
                         if(it.errors?.isNotEmpty() == true) {
-                            _networkState.postValue(NetworkState(Status.FAILED, it.errors!![0].message ))
-                        } else _userToken.postValue(it.data?.loginAsAdmin?.token)
+                            loginCallBack.onError(it.errors!![0].message)
+                        } else loginCallBack.onSuccess(it.data?.loginAsAdmin?.token)
                     },{ onFailure(it) })
             )
         } catch (e: Exception) {
             _networkState.postValue(NetworkState.ERROR)
             Log.e(TAG, e.toString())
         }
-    }
-
-    fun clearToken() {
-        _userToken.postValue("")
     }
 }

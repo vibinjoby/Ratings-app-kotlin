@@ -81,6 +81,8 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
                     reviewsHeader.visibility = View.GONE
                     noReviewsLayout.visibility = View.VISIBLE
                 } else {
+                    reviewsHeader.visibility = View.VISIBLE
+                    noReviewsLayout.visibility = View.GONE
                     reviewAdapter.submitList(it.getRestaurant.reviews)
                     reviewRv.adapter = reviewAdapter
                     reviewRv.layoutManager = LinearLayoutManager(requireContext())

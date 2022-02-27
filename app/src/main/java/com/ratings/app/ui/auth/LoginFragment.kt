@@ -28,7 +28,6 @@ import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
 class LoginFragment : DaggerFragment(R.layout.fragment_login) {
-    private val TAG = "LoginFragment"
 
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private val authViewModel: AuthViewModel by viewModels {
@@ -81,51 +80,41 @@ class LoginFragment : DaggerFragment(R.layout.fragment_login) {
                 if(emailValue.isNotBlank() && passwordValue.isNotBlank()) {
                     val userType = fetchUserType(userType.text.toString())
 
-
                     if(userType == UserType.admin) {
                         val loginInput = CreateAdminInput(emailValue, passwordValue)
-                        observerAdminLogin(loginInput)
+                        authViewModel.adminLogin(loginInput)
                     } else {
                         val loginInput = LoginInput(emailValue, passwordValue, userType)
-                        observeUserLogin(loginInput)
+                        authViewModel.login(loginInput)
                     }
-
-                    authViewModel.networkState.observe(this@LoginFragment.viewLifecycleOwner, {
-                        if(it.status == Status.FAILED) {
-                            Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
-                        }
-                        // Show progress bar based on network status
-                        toggleProgressBarOnNetworkState(it, progressBar)
-                    })
                 }
             }
         }
+
+        authViewModel.userToken.observe(viewLifecycleOwner, {
+            val userTypeSelection = view.findViewById<RadioButton>(userTypeRadioGroup.checkedCheckableImageButtonId)
+            val userType = fetchUserType(userTypeSelection.text.toString())
+            var action: NavDirections = if(userType == UserType.admin) {
+                LoginFragmentDirections.actionLoginFragmentToAdminHomeFragment()
+            } else {
+                LoginFragmentDirections.actionLoginFragmentToHomeFragment()
+            }
+            navigateTo(action)
+        })
+
+        authViewModel.networkState.observe(viewLifecycleOwner, {
+            if(it.status == Status.FAILED) {
+                Toast.makeText(requireContext(), it.message, Toast.LENGTH_SHORT).show()
+            }
+            // Show progress bar based on network status
+            toggleProgressBarOnNetworkState(it, progressBar)
+        })
 
         view.findViewById<Button>(R.id.signup_btn).setOnClickListener {
             val action = LoginFragmentDirections.actionLoginFragmentToSignupFragment()
             navigateTo(action)
         }
         return view
-    }
-
-    private fun observeUserLogin(loginInput: LoginInput) {
-        authViewModel.login(loginInput).observe(viewLifecycleOwner, {
-            // Save the access token
-            authViewModel.saveAccessToken(it)
-            // Navigate to homePage
-            val action = LoginFragmentDirections.actionLoginFragmentToHomeFragment()
-            navigateTo(action)
-        })
-    }
-
-    private fun observerAdminLogin(createAdminInput: CreateAdminInput) {
-        authViewModel.adminLogin(createAdminInput).observe(viewLifecycleOwner, {
-            // Save the access token
-            authViewModel.saveAccessToken(it)
-            // Navigate to homePage
-            val action = LoginFragmentDirections.actionLoginFragmentToAdminHomeFragment()
-            navigateTo(action)
-        })
     }
 
     private fun navigateTo(action: NavDirections) {
