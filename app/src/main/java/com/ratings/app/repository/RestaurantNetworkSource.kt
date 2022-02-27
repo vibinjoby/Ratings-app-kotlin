@@ -10,7 +10,7 @@ import io.reactivex.disposables.CompositeDisposable
 import java.lang.Exception
 import javax.inject.Inject
 
-class RestaurantNetworkSource @Inject constructor(private val apiService: RatingsApiClient) {
+class RestaurantNetworkSource @Inject constructor(private val apiService: RatingsApiClient, private val homeNetworkSource: HomeNetworkSource) {
     private var _networkState = MutableLiveData<NetworkState>()
     val networkState: LiveData<NetworkState>
         get() = _networkState
@@ -67,6 +67,7 @@ class RestaurantNetworkSource @Inject constructor(private val apiService: Rating
                         {
                             _networkState.postValue(NetworkState.LOADED)
                             getRestaurantDetails(compositeDisposable, createReviewInput.restaurantId)
+                            homeNetworkSource.fetchAllRestaurants(compositeDisposable)
                         },
                         {
                             _networkState.postValue(NetworkState(Status.FAILED, it.message!! ))

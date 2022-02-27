@@ -6,6 +6,7 @@ import com.ratings.app.api.RatingsApiClient
 import com.ratings.app.helper.KEY_ACCESS_TOKEN
 import com.ratings.app.repository.AuthNetworkSource
 import com.ratings.app.repository.HomeNetworkSource
+import com.ratings.app.repository.RestaurantNetworkSource
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -33,6 +34,11 @@ class NetworkModule {
     @Provides
     fun provideAuthNetworkSource(apiClient: RatingsApiClient): AuthNetworkSource {
         return AuthNetworkSource(apiClient)
+    }
+
+    @Provides
+    fun provideRestaurantNetworkSource(apiClient: RatingsApiClient, homeNetworkSource: HomeNetworkSource): RestaurantNetworkSource {
+        return RestaurantNetworkSource(apiClient, homeNetworkSource)
     }
 
     @Provides

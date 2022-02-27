@@ -18,6 +18,7 @@ import com.ratings.app.R
 import com.ratings.app.helper.toggleProgressBarOnNetworkState
 import com.ratings.app.repository.NetworkState
 import com.ratings.app.type.CreateReviewInput
+import com.ratings.app.ui.viewmodels.HomeViewModel
 import com.ratings.app.ui.viewmodels.RestaurantViewModel
 import com.ratings.app.ui.viewmodels.ViewModelFactory
 import dagger.android.support.DaggerFragment
@@ -29,6 +30,9 @@ class AddReviewFragment : DaggerFragment(R.layout.fragment_add_review) {
     private val args: AddReviewFragmentArgs by navArgs()
     @Inject lateinit var viewModelFactory: ViewModelProvider.Factory
     private val restaurantViewModel: RestaurantViewModel by viewModels {
+        viewModelFactory
+    }
+    private val homeViewModel: HomeViewModel by viewModels {
         viewModelFactory
     }
 
@@ -58,6 +62,7 @@ class AddReviewFragment : DaggerFragment(R.layout.fragment_add_review) {
         restaurantViewModel.networkState.observe(viewLifecycleOwner, {
             if(it == NetworkState.LOADED) {
                 findNavController().navigateUp()
+                homeViewModel.restaurantList
             }
         })
         return view
