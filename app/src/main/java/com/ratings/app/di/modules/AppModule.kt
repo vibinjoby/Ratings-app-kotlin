@@ -19,7 +19,6 @@ class AppModule(private val app: RatingsApplication) {
     fun provideApplicationContext(): Context = app
 
     @Provides
-    @Singleton
     fun provideSharedPreference(context: Context): SharedPreferences {
         return context.getSharedPreferences(KEY_PREFS + BuildConfig.APPLICATION_ID, Context.MODE_PRIVATE)
     }
