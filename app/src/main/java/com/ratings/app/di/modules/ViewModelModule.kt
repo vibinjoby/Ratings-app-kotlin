@@ -2,10 +2,7 @@ package com.ratings.app.di.modules
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.ratings.app.ui.viewmodels.HomeViewModel
-import com.ratings.app.ui.viewmodels.AuthViewModel
-import com.ratings.app.ui.viewmodels.RestaurantViewModel
-import com.ratings.app.ui.viewmodels.ViewModelFactory
+import com.ratings.app.ui.viewmodels.*
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -28,6 +25,11 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RestaurantViewModel::class)
     abstract fun bindRestaurantViewModel(restaurantViewModel: RestaurantViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(AdminViewModel::class)
+    abstract fun bindAdminViewModel(adminViewModel: AdminViewModel): ViewModel
 
     @Binds
     abstract fun bindViewModelFactory(factory: ViewModelFactory ):ViewModelProvider.Factory

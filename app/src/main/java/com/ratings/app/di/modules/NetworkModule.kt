@@ -30,19 +30,4 @@ class NetworkModule {
     fun provideApiClient(okHttpClient: OkHttpClient): RatingsApiClient {
         return RatingsApiClient(okHttpClient)
     }
-
-    @Provides
-    fun provideAuthNetworkSource(apiClient: RatingsApiClient): AuthNetworkSource {
-        return AuthNetworkSource(apiClient)
-    }
-
-    @Provides
-    fun provideRestaurantNetworkSource(apiClient: RatingsApiClient, homeNetworkSource: HomeNetworkSource): RestaurantNetworkSource {
-        return RestaurantNetworkSource(apiClient, homeNetworkSource)
-    }
-
-    @Provides
-    fun provideHomeNetworkSource(apiClient: RatingsApiClient): HomeNetworkSource {
-        return HomeNetworkSource(apiClient)
-    }
 }
