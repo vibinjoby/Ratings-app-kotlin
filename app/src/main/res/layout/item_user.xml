@@ -9,36 +9,47 @@
         android:id="@+id/user_pic_iv"
         android:layout_width="45dp"
         android:layout_height="45dp"
+        android:scaleType="centerCrop"
         tools:src="@drawable/admin_user_pic"
-        android:layout_constraintTop_toTopOf="parent"
-        android:layout_constraintLeft_toLeftOf="parent"/>
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"/>
 
-    <TextView
-        android:id="@+id/user_name_tv"
+    <LinearLayout
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginLeft="20dp"
+        app:layout_constraintLeft_toRightOf="@id/user_pic_iv"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Jackie"
-        app:layout_constraintLeft_toRightOf="@id/user_pic_iv"
-        app:layout_constraintTop_toTopOf="@id/user_pic_iv"
-        app:layout_constraintBottom_toBottomOf="@id/user_pic_iv"
-        />
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/user_name_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Jackie"
+            app:layout_constraintLeft_toRightOf="@id/user_pic_iv"
+            app:layout_constraintTop_toTopOf="@id/user_pic_iv"
+            app:layout_constraintBottom_toBottomOf="@id/user_pic_iv"
+            />
 
-    <TextView
-        android:id="@+id/user_type_tv"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="customer"
-        app:layout_constraintLeft_toRightOf="@id/user_pic_iv"
-        app:layout_constraintTop_toBottomOf="@id/user_name_tv"
-        />
+        <TextView
+            android:id="@+id/user_type_tv"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="customer"
+            app:layout_constraintLeft_toRightOf="@id/user_pic_iv"
+            app:layout_constraintTop_toBottomOf="@id/user_name_tv"
+            />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/delete_user_iv"
         android:layout_width="24dp"
         android:layout_height="24dp"
         tools:src="@drawable/trash_ic"
-        app:layout_marginLeft="20dp"
-        app:layout_marginTop="20dp"
+        android:scaleType="centerCrop"
+        android:layout_marginRight="20dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintRight_toRightOf="parent"/>

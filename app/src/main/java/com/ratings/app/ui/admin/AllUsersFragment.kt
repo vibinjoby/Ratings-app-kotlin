@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
 import com.ratings.app.ui.viewmodels.AdminViewModel
 import com.ratings.app.ui.viewmodels.ViewModelFactory
@@ -19,6 +21,7 @@ class AllUsersFragment : DaggerFragment(R.layout.fragment_all_users) {
     private val adminViewModel: AdminViewModel by viewModels {
         viewModelFactory
     }
+    private val allUsersAdapter = UserListAdapter()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -26,8 +29,11 @@ class AllUsersFragment : DaggerFragment(R.layout.fragment_all_users) {
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_all_users, container, false)
+        val allUsersRv = view.findViewById<RecyclerView>(R.id.all_users_rv)
+        allUsersRv.adapter = allUsersAdapter
+        allUsersRv.layoutManager = LinearLayoutManager(requireContext())
         adminViewModel.usersList.observe(viewLifecycleOwner, {
-            println(it)
+            allUsersAdapter.submitList(it.users)
         })
         return view
     }

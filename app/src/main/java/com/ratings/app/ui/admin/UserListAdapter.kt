@@ -12,7 +12,7 @@ import com.ratings.app.R
 import com.ratings.app.UsersListQuery
 
 class UserViewHolder(view: View): RecyclerView.ViewHolder(view) {
-    private val usernameTv = view.findViewById<TextView>(R.id.user_pic_iv)
+    private val usernameTv = view.findViewById<TextView>(R.id.user_name_tv)
     private val usertypeTv = view.findViewById<TextView>(R.id.user_type_tv)
     private val deleteIcIv = view.findViewById<ImageView>(R.id.delete_user_iv)
 
