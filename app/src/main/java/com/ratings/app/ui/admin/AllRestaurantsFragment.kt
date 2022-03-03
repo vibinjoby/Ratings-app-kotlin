@@ -1,12 +1,13 @@
 package com.ratings.app.ui.admin
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
 import com.ratings.app.ui.viewmodels.AdminViewModel
 import dagger.android.support.DaggerFragment
@@ -25,8 +26,18 @@ class AllRestaurantsFragment : DaggerFragment(R.layout.fragment_all_restaurants)
     ): View? {
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_all_restaurants, container, false)
+        val recyclerView = view.findViewById<RecyclerView>(R.id.all_restaurants_rv)
+        val restaurantListAdapter = RestaurantListAdapter {
+            // navigate to review detail screen
+        }
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView.adapter = restaurantListAdapter
+
         adminViewModel.restaurantsList.observe(viewLifecycleOwner, {
-            println(it)
+            val list = it?.edges?.map { edge ->
+                edge.node
+            }
+            restaurantListAdapter.submitList(list)
         })
         return view
     }
