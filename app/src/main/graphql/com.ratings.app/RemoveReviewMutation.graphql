@@ -1,0 +1,3 @@
+mutation RemoveReviewMutation($id: Int!) {
+    removeReview(id: $id)
+}

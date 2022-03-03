@@ -34,6 +34,7 @@
         <entry key="app/src/main/res/drawable/tab_right_button_selected.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/tab_right_button_selector.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/drawable/textview_border.xml" value="0.25416666666666665" />
+        <entry key="app/src/main/res/drawable/user_pic_bg.xml" value="0.25416666666666665" />
         <entry key="app/src/main/res/drawable/view_border.xml" value="0.13645833333333332" />
         <entry key="app/src/main/res/layout/activity_main.xml" value="0.11927083333333334" />
         <entry key="app/src/main/res/layout/alert_dialog_view.xml" value="0.25" />

@@ -6,7 +6,7 @@ import com.ratings.app.repository.RestaurantRepository
 import io.reactivex.disposables.CompositeDisposable
 import javax.inject.Inject
 
-class AdminViewModel @Inject constructor(repository: AdminRepository): ViewModel() {
+class AdminViewModel @Inject constructor(private val repository: AdminRepository): ViewModel() {
     val compositeDisposable = CompositeDisposable()
 
     val usersList by lazy {
@@ -15,6 +15,10 @@ class AdminViewModel @Inject constructor(repository: AdminRepository): ViewModel
 
     val restaurantsList by lazy {
         repository.fetchAllRestaurants(compositeDisposable)
+    }
+
+    fun deleteUser(userId: Int) {
+        repository.deleteUser(compositeDisposable, userId)
     }
 
     override fun onCleared() {

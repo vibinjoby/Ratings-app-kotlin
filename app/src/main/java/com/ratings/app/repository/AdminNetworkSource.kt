@@ -67,4 +67,26 @@ class AdminNetworkSource @Inject constructor(private val apiClient: RatingsApiCl
         }
     }
 
+    fun deleteUser(compositeDisposable: CompositeDisposable, userId: Int) {
+        _networkState.postValue(NetworkState.LOADING)
+        try {
+            compositeDisposable.add(
+                apiClient.deleteUser(userId)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe (
+                        {
+                            _networkState.postValue(NetworkState.LOADED)
+                            fetchAllUsers(compositeDisposable)
+                        },{
+                            _networkState.postValue(NetworkState.ERROR)
+                            Log.e(TAG, it.toString())
+                        }
+                    )
+            )
+        } catch (e: Exception) {
+            _networkState.postValue(NetworkState.ERROR)
+            Log.e(TAG, e.toString())
+        }
+    }
+
 }

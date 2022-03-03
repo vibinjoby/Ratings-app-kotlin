@@ -18,4 +18,8 @@ class AdminRepository @Inject constructor(private val adminNetworkSource: AdminN
         adminNetworkSource.fetchAllRestaurants(compositeDisposable)
         return adminNetworkSource.restaurantList
     }
+
+    fun deleteUser(compositeDisposable: CompositeDisposable, userId: Int) {
+        adminNetworkSource.deleteUser(compositeDisposable, userId)
+    }
 }

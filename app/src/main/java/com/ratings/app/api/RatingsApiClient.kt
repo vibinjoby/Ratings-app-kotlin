@@ -78,4 +78,10 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
         val apolloCall = getClient().query(usersQuery)
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
+
+    fun deleteUser(userId: Int): Single<ApolloResponse<RemoveUserMutation.Data>> {
+        val removeUserMutation = RemoveUserMutation(userId)
+        val apolloCall = getClient().mutation(removeUserMutation)
+        return Rx2Apollo.flowable(apolloCall).firstOrError()
+    }
 }
