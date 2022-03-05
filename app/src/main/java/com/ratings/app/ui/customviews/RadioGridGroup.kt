@@ -50,14 +50,13 @@ class RadioGridGroup : GridLayout {
 
     override fun addView(child: View, index: Int, params: ViewGroup.LayoutParams) {
         if (child is AppCompatRadioButton) {
-            val button = child
-            if (button.isChecked) {
+            if (child.isChecked) {
                 protectFromCheckedChange = true
                 if (checkedCheckableImageButtonId != NOTHING_CHECKED) {
                     setCheckedStateForView(checkedCheckableImageButtonId, false)
                 }
                 protectFromCheckedChange = false
-                setCheckedId(button.id)
+                setCheckedId(child.id)
             }
         }
         super.addView(child, index, params)
