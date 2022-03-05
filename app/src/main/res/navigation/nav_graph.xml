@@ -69,7 +69,11 @@
         android:id="@+id/allRestaurantsFragment"
         android:name="com.ratings.app.ui.admin.AllRestaurantsFragment"
         android:label="fragment_all_restaurants"
-        tools:layout="@layout/fragment_all_restaurants" />
+        tools:layout="@layout/fragment_all_restaurants" >
+        <action
+            android:id="@+id/action_allRestaurantsFragment_to_allReviewsFragment"
+            app:destination="@id/allReviewsFragment" />
+    </fragment>
     <fragment
         android:id="@+id/allUsersFragment"
         android:name="com.ratings.app.ui.admin.AllUsersFragment"
@@ -105,6 +109,15 @@
         android:name="com.ratings.app.ui.restaurant.AddReviewFragment"
         android:label="fragment_add_review"
         tools:layout="@layout/fragment_add_review" >
+        <argument
+            android:name="id"
+            app:argType="integer"
+            android:defaultValue="0" />
+    </fragment>
+    <fragment
+        android:id="@+id/allReviewsFragment"
+        android:name="com.ratings.app.ui.admin.AllReviewsFragment"
+        android:label="AllReviewsFragment" >
         <argument
             android:name="id"
             app:argType="integer"

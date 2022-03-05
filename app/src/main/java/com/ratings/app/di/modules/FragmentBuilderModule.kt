@@ -2,6 +2,7 @@ package com.ratings.app.di.modules
 
 import com.ratings.app.ui.admin.AdminHomeFragment
 import com.ratings.app.ui.admin.AllRestaurantsFragment
+import com.ratings.app.ui.admin.AllReviewsFragment
 import com.ratings.app.ui.admin.AllUsersFragment
 import com.ratings.app.ui.home.HomeFragment
 import com.ratings.app.ui.auth.LoginFragment
@@ -40,4 +41,7 @@ abstract class FragmentBuilderModule {
 
     @ContributesAndroidInjector
     abstract fun contributeAddReviewFragment(): AddReviewFragment
+
+    @ContributesAndroidInjector
+    abstract fun contributeAllReviewsFragment(): AllReviewsFragment
 }

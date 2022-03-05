@@ -7,6 +7,7 @@ import com.apollographql.apollo3.api.Optional
 import com.ratings.app.RestaurantListQuery
 import com.ratings.app.UsersListQuery
 import com.ratings.app.api.RatingsApiClient
+import com.ratings.app.type.UpdateReviewInput
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import java.lang.Exception
@@ -77,6 +78,27 @@ class AdminNetworkSource @Inject constructor(private val apiClient: RatingsApiCl
                         {
                             _networkState.postValue(NetworkState.LOADED)
                             fetchAllUsers(compositeDisposable)
+                        },{
+                            _networkState.postValue(NetworkState.ERROR)
+                            Log.e(TAG, it.toString())
+                        }
+                    )
+            )
+        } catch (e: Exception) {
+            _networkState.postValue(NetworkState.ERROR)
+            Log.e(TAG, e.toString())
+        }
+    }
+
+    fun updateReview(compositeDisposable: CompositeDisposable, updateReviewInput: UpdateReviewInput) {
+        _networkState.postValue(NetworkState.LOADING)
+        try {
+            compositeDisposable.add(
+                apiClient.updateReview(updateReviewInput)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe (
+                        {
+                            _networkState.postValue(NetworkState.LOADED)
                         },{
                             _networkState.postValue(NetworkState.ERROR)
                             Log.e(TAG, it.toString())

@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -29,6 +30,7 @@ class AllUsersFragment : DaggerFragment(R.layout.fragment_all_users) {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = "All Users"
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_all_users, container, false)
         val allUsersRv = view.findViewById<RecyclerView>(R.id.all_users_rv)

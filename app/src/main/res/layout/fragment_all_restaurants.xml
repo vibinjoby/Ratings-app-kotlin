@@ -5,25 +5,12 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginTop="16dp"
     xmlns:tools="http://schemas.android.com/tools"
-    tools:context=".ui.admin.AllRestaurantsFragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
-    <TextView
-        android:id="@+id/all_restaurant_header_tv"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="All Restaurants"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:fontFamily="@font/poppins_bold"
-        android:textSize="22sp"
-        android:textColor="#424242"/>
+    tools:context=".ui.admin.AllRestaurantsFragment">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/all_restaurants_rv"
         android:layout_width="match_parent"
-        app:layout_constraintTop_toBottomOf="@id/all_restaurant_header_tv"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         tools:listitem="@layout/item_admin_restaurant"
         />
 

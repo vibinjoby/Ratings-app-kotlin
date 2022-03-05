@@ -53,6 +53,7 @@ class AdminHomeFragment : DaggerFragment(R.layout.fragment_admin_home) {
         savedInstanceState: Bundle?
     ): View? {
         (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+        (activity as AppCompatActivity?)!!.supportActionBar?.title = "Welcome Admin"
         setHasOptionsMenu(true)
         // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_admin_home, container, false)
