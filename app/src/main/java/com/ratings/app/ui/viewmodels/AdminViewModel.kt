@@ -44,6 +44,10 @@ class AdminViewModel @Inject constructor(private val repository: AdminRepository
         restaurantRepository.getRestaurantDetails(compositeDisposable, restaurantId)
     }
 
+    fun deleteReview(reviewId: Int): LiveData<NetworkState> {
+        return repository.deleteReview(compositeDisposable, reviewId)
+    }
+
     override fun onCleared() {
         super.onCleared()
         compositeDisposable.dispose()

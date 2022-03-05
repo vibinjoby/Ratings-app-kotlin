@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.RecyclerView
 import com.ratings.app.R
 import com.ratings.app.RestaurantDetailsQuery
 import com.ratings.app.type.UserType
+import com.ratings.app.ui.customviews.AppAlertDialog
 import com.ratings.app.ui.customviews.EditReviewDialog
 
 class ReviewViewHolder(
     val userType: String,
     val view: View,
     private val onSaveEditResponse: ((reviewText: String, ratingBar: Double, ownerResponse: String, reviewId: Int) -> Unit)?,
+    private val onDeleteReview: ((reviewId: Int) -> Unit)?,
     private val onSaveReply: ((reviewId: Int, reply: String)-> Unit)?): RecyclerView.ViewHolder(view) {
     fun bind(review: RestaurantDetailsQuery.Review) {
         val ratingBar = view.findViewById<AppCompatRatingBar>(R.id.rating_bar)
@@ -68,6 +70,16 @@ class ReviewViewHolder(
                             dialog.show()
                             true
                         }
+                        R.id.delete_review -> {
+                            val dialog = AppAlertDialog(view.context,
+                                "Are you sure you want to delete this review?") {
+                                onDeleteReview?.let {
+                                    it(review.id)
+                                }
+                            }
+                            dialog.show()
+                            true
+                        }
                         else -> false
                     }
                 }
@@ -88,6 +100,7 @@ class ReviewViewHolder(
 class ReviewListAdapter(
         val userType: String,
         private val onSaveEditResponse: ((reviewText: String, ratingBar: Double, ownerResponse: String,reviewId: Int)-> Unit)? = null,
+        private val onDeleteReview: ((reviewId: Int) -> Unit)? = null,
         private val onSaveReply: ((reviewId: Int, reply: String) -> Unit)? = null
     ) : ListAdapter<RestaurantDetailsQuery.Review, ReviewViewHolder>(DIFF_CONFIG) {
     companion object {
@@ -109,9 +122,8 @@ class ReviewListAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReviewViewHolder {
-        val view =
-            LayoutInflater.from(parent.context).inflate(R.layout.item_review, parent, false)
-        return ReviewViewHolder(userType, view,onSaveEditResponse, onSaveReply)
+        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_review, parent, false)
+        return ReviewViewHolder(userType, view,onSaveEditResponse, onDeleteReview, onSaveReply)
     }
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {

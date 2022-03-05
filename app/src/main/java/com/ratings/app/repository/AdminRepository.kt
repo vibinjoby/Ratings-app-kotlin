@@ -28,4 +28,9 @@ class AdminRepository @Inject constructor(private val adminNetworkSource: AdminN
     fun deleteUser(compositeDisposable: CompositeDisposable, userId: Int) {
         adminNetworkSource.deleteUser(compositeDisposable, userId)
     }
+
+    fun deleteReview(compositeDisposable: CompositeDisposable, reviewId: Int): LiveData<NetworkState> {
+        adminNetworkSource.deleteReview(compositeDisposable, reviewId)
+        return adminNetworkSource.networkState
+    }
 }

@@ -45,6 +45,12 @@ class AllReviewsFragment : DaggerFragment(R.layout.fragment_all_reviews) {
                     adminViewModel.fetchRestaurantDetails(args.id)
                 }
             })
+        },{ reviewId ->
+            adminViewModel.deleteReview(reviewId).observe(viewLifecycleOwner, {
+                if (it == NetworkState.LOADED) {
+                    adminViewModel.fetchRestaurantDetails(args.id)
+                }
+            })
         })
         allReviewsRv.layoutManager = LinearLayoutManager(requireContext())
         allReviewsRv.adapter = reviewListAdapter

@@ -85,6 +85,12 @@ class RatingsApiClient @Inject constructor(private val okHttpClient: OkHttpClien
         return Rx2Apollo.flowable(apolloCall).firstOrError()
     }
 
+    fun deleteReview(reviewId: Int): Single<ApolloResponse<RemoveReviewMutation.Data>> {
+        val removeReviewMutation = RemoveReviewMutation(reviewId)
+        val apolloCall = getClient().mutation(removeReviewMutation)
+        return Rx2Apollo.flowable(apolloCall).firstOrError()
+    }
+
     fun updateReview(updateReviewInput: UpdateReviewInput): Single<ApolloResponse<UpdateReviewMutation.Data>> {
         val updateReviewMutation = UpdateReviewMutation(updateReviewInput)
         val apolloCall = getClient().mutation(updateReviewMutation)

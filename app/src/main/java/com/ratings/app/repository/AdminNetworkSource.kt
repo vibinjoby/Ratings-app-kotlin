@@ -111,4 +111,25 @@ class AdminNetworkSource @Inject constructor(private val apiClient: RatingsApiCl
         }
     }
 
+    fun deleteReview(compositeDisposable: CompositeDisposable, reviewId: Int) {
+        _networkState.postValue(NetworkState.LOADING)
+        try {
+            compositeDisposable.add(
+                apiClient.deleteReview(reviewId)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe (
+                        {
+                            _networkState.postValue(NetworkState.LOADED)
+                        },{
+                            _networkState.postValue(NetworkState.ERROR)
+                            Log.e(TAG, it.toString())
+                        }
+                    )
+            )
+        } catch (e: Exception) {
+            _networkState.postValue(NetworkState.ERROR)
+            Log.e(TAG, e.toString())
+        }
+    }
+
 }

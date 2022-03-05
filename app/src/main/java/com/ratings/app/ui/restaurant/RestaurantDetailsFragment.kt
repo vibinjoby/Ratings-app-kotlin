@@ -68,7 +68,7 @@ class RestaurantDetailsFragment : DaggerFragment(R.layout.fragment_restaurant_de
         }
         restaurantViewModel.getRestaurantDetails(args.id)
             .observe(viewLifecycleOwner, {
-                val reviewAdapter = ReviewListAdapter(userType, null) { reviewId, reply ->
+                val reviewAdapter = ReviewListAdapter(userType, null, null) { reviewId, reply ->
                     restaurantViewModel.saveOwnerResponse(args.id, reviewId,reply )
                 }
                 Glide.with(this)
